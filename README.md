@@ -8,8 +8,10 @@
 
 
 简介：该程序通知Java执行ADB CMD命名获取回调信息判断设备信息，获取信息时通过多线程操作节约读取时间；
-	
 
+
+
+备注：代码未做兼容性测试，部分功能模块在不同CPU设备上有读取设备兼容性问题，同时不同系统版本可能有问题，请自测。
 
 
 
@@ -122,21 +124,30 @@ $ adb shell dumpsys package com.test.benjamin |grep -B5 android.intent.category.
 		
 ## 查看系统进程pid，判断运行程序位数，有坑部分机型 adb shell ps 可能显示显示不出进程信息
 $ adb shell ps -A |grep com.test.benjamin
+
 u0_a862       8771   632 2065724 158884 0                   0 S com.test.benjamin
+
 u0_a862       8873   632 1888260  86208 0                   0 S com.test.benjamin:pushcore
+
 u0_a862       9236   632 1852636  85000 0                   0 S com.test.benjamin:monitorService
+
 u0_a862       9433   632 1769844  73896 0                   0 S com.test.benjamin:channel
+
 
 ## 查看系统32位 64位进程pid用户对比判断被检查app运行位数
 $ adb shell ps -A |grep zygote
+
 root           631     1 2183544  28908 0                   0 S zygote64
+
 root           632     1 1621752  23992 0                   0 S zygote
+
 webview_zygote 2217    1 1429812  13896 0                   0 S webview_zygote32
 
 
 
 ## 备份apk
 adb shell pm path <packname>
+
 adb pull <path>
 
 
