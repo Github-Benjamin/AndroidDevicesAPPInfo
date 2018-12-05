@@ -37,7 +37,7 @@
                     <archive>
                         <manifest>
                             <!-- 主函数的入口 -->
-                            <mainClass>MainUI</mainClass>
+                            <mainClass>MainUITest</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>

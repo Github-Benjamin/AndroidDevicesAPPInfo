@@ -8,8 +8,9 @@ public class DevicesTopAPP {
 
 
     public static String GetAdbDevices = "adb devices";
-    public static String GetTopAPP = "adb shell dumpsys activity activities  |grep -i hist |head -1";
-    public static String PackName,PackPath,GetTopAPPBit,CompatibleOS;
+    public static String GetTopAPP = "adb shell dumpsys activity activities  |grep -i hist |grep visible=true -1";
+    public static String PackName,PackPath,GetTopAPPBit;
+    public static String CompatibleOS = "";
     public static String GetTopAPPMainActivity = "adb shell dumpsys package " + PackName + " |grep -B5 android.intent.category.LAUNCHER  |grep filter";
     public static String GetAPPPID = "adb shell ps " + CompatibleOS + " |grep "+ PackName ;
     public static String GetSystemPID = "adb shell ps  " + CompatibleOS + " |grep zygote64";
@@ -18,29 +19,30 @@ public class DevicesTopAPP {
     private static String SystemResult;
 
 
-//    public static void main(String[] args) {
-//
-//        // 获取顶层APP程序包名和Activity
-//        GetTopAPP = Main.CmdPull(GetTopAPP).split(" ")[11];  // 此处有坑，不支持 32位 手机 head -1
-//        TopAPPInfo.setPackTopActivity(GetTopAPP);
-//        TopAPPInfo.setPackName(GetTopAPP.split("/")[0]);
-//
-//        // 获取顶层APP的第一启动启动界面Activity
-//        PackName = TopAPPInfo.getPackName(); // 获取程序包名
-//        GetTopAPPMainActivity = Main.CmdPull(GetTopAPPMainActivity(PackName));
-//        TopAPPInfo.setPackMainActivity(SetTopAPPMainActivity(GetTopAPPMainActivity)); // 异常处理部分程序无该界面
-//
-//        // 获取顶层APP是否是 32位 或者 64位应用
-//        GetTopAPPBit = GetTopAPPBit(PackName);
-//
-//        // 备份apk,存储apk路径
-//        GetPmPath = Main.CmdPull(GetPmPath(PackName));
-//        TopAPPInfo.setPackPath(GetPmPath.split("\n")[0].split(":")[1]);
-//
-//        // 执行pull备份到本地
-//        // GetPullFile(TopAPPInfo.getPackPath(),TopAPPInfo.getPackName());
-//
-//    }
+    public static void main(String[] args) {
+
+        // 获取顶层APP程序包名和Activity
+        GetTopAPP = Main.CmdPull(GetTopAPP).split(" ")[11];  // 此处有坑，不支持 32位 手机 head -1
+        TopAPPInfo.setPackTopActivity(GetTopAPP);
+        TopAPPInfo.setPackName(GetTopAPP.split("/")[0]);
+
+        // 获取顶层APP的第一启动启动界面Activity
+        PackName = TopAPPInfo.getPackName(); // 获取程序包名
+        GetTopAPPMainActivity = Main.CmdPull(GetTopAPPMainActivity(PackName));
+        TopAPPInfo.setPackMainActivity(SetTopAPPMainActivity(GetTopAPPMainActivity)); // 异常处理部分程序无该界面
+
+        // 获取顶层APP是否是 32位 或者 64位应用
+        GetTopAPPBit = GetTopAPPBit(PackName);
+
+        // 备份apk,存储apk路径
+        GetPmPath = Main.CmdPull(GetPmPath(PackName));
+        String[]    GetPmPaths = GetPmPath.split("\n");
+        TopAPPInfo.setPackPath(GetPmPaths[GetPmPaths.length-1].split(":")[1]);
+
+        // 执行pull备份到本地
+        // GetPullFile(TopAPPInfo.getPackPath(),TopAPPInfo.getPackName());
+
+    }
 
 
 
@@ -185,6 +187,7 @@ class GetPmPathThread implements Runnable {
         // 备份apk,存储apk路径
         PackName = TopAPPInfo.getPackName();
         GetPmPath = Main.CmdPull(DevicesTopAPP.GetPmPath(PackName));
-        TopAPPInfo.setPackPath(GetPmPath.split("\n")[0].split(":")[1]);
+        String[]    GetPmPaths = GetPmPath.split("\n");
+        TopAPPInfo.setPackPath(GetPmPaths[GetPmPaths.length-1].split(":")[1]);
     }
 }
