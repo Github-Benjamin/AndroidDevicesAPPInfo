@@ -238,7 +238,13 @@ class GetMemTotalThread implements Runnable {
         // 获取手机 model
         GetMeminfo = Main.CmdPull(Main.GetMeminfo);
         MemTotal = Main.CountMeminfo(Main.GetMeminfo(GetMeminfo,"MemTotal:.*?(\\d+) kB"));
-        MemAvailable = Main.CountMeminfo(Main.GetMeminfo(GetMeminfo,"MemAvailable:.*?(\\d+) kB"));
+
+        try {
+            MemAvailable = Main.CountMeminfo(Main.GetMeminfo(GetMeminfo,"MemAvailable:.*?(\\d+) kB"));
+        }catch (Exception e){
+            MemAvailable = Main.CountMeminfo(Main.GetMeminfo(GetMeminfo,"Cached:.*?(\\d+) kB"));
+        }
+
         DevicesInfo.setMemTotal(MemTotal);
         DevicesInfo.setMemAvailable(MemAvailable);
     }
