@@ -9,10 +9,19 @@ public class TopAPPInfo {
     public static String PackName;
     public static String PackPath;
     public static String PIDzygote;
+    public static String PIDzygotetwo;
     public static String PIDPackName;
     public static String PackMainActivity;
     public static String PackTopActivity;
     public static String PackBit;
+
+    public static String getPIDzygotetwo() {
+        return PIDzygotetwo;
+    }
+
+    public static void setPIDzygotetwo(String PIDzygotetwo) {
+        TopAPPInfo.PIDzygotetwo = PIDzygotetwo;
+    }
 
     public static String getPackBit() {
         return PackBit;
