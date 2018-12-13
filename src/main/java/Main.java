@@ -166,7 +166,7 @@ public class Main {
         // 计算内存大小，以G为内存单位
         DecimalFormat df = new DecimalFormat("0.00"); //格式化小数
         String num = df.format((float)Integer.parseInt(MemTotal)/1024/1000); //返回的是String类型
-        MemTotal =  num + " G";
+        MemTotal =  num + "G";
         return MemTotal;
     }
 
@@ -223,7 +223,7 @@ class GetScreenSizeThread implements Runnable {
     private static String GetGetScreen;
     public void run() {
         // 获取手机 model
-        GetGetScreen = Main.CmdPull(Main.GetScreen).split("Physical size: ")[1];
+        GetGetScreen = Main.CmdPull(Main.GetScreen).split("\n")[0].split("Physical size: ")[1];
         DevicesInfo.setScreenSize(GetGetScreen);
     }
 }
@@ -259,13 +259,24 @@ class GetTotalMemThread implements Runnable {
     private static String UsingMem;
     public void run() {
         GetStore = Main.CmdPull(Main.GetStore);
+
         String[] GetStoreList = GetStore.split("\n")[0].split(" ");
-        TotalMem = Main.CountMeminfo(GetStoreList[2]);
-        SurplusMem = Main.CountMeminfo(GetStoreList[3]);
-        UsingMem = Main.CountMeminfo(GetStoreList[5]);
-        DevicesInfo.setTotalMem(TotalMem);
-        DevicesInfo.setSurplusMem(SurplusMem);
-        DevicesInfo.setUsingMem(UsingMem);
+
+        // 解决部分设备获取存储内存时，显示G为单位的情况
+        if (GetStore.split("\n")[0].indexOf("G")!=-1){
+            // 存在包含关系
+            DevicesInfo.setTotalMem(GetStoreList[19]);
+            DevicesInfo.setSurplusMem(GetStoreList[24]);
+            DevicesInfo.setUsingMem(GetStoreList[29]);
+        }else{
+            TotalMem = Main.CountMeminfo(GetStoreList[2]);
+            SurplusMem = Main.CountMeminfo(GetStoreList[3]);
+            UsingMem = Main.CountMeminfo(GetStoreList[5]);
+            DevicesInfo.setTotalMem(TotalMem);
+            DevicesInfo.setSurplusMem(SurplusMem);
+            DevicesInfo.setUsingMem(UsingMem);
+        }
+
     }
 }
 
@@ -273,8 +284,13 @@ class GetTotalMemThread implements Runnable {
 class GetCPUNameThread implements Runnable {
     private static String CPUName;
     public void run() {
-       CPUName = Main.CmdPull(Main.GetCpuName).split("Hardware\t: ")[1];
-        DevicesInfo.setCpuName(CPUName);
+        try {
+            CPUName = Main.CmdPull(Main.GetCpuName).split("Hardware\t: ")[1];
+            DevicesInfo.setCpuName(CPUName);
+        }catch (Exception e){
+            DevicesInfo.setCpuName("Get Devices CPUName Error");
+        }
+
     }
 }
 
