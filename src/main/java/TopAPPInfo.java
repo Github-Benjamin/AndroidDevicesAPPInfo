@@ -14,6 +14,10 @@ public class TopAPPInfo {
     public static String PackMainActivity;
     public static String PackTopActivity;
     public static String PackBit;
+    public static String versionCode;
+    public static String versionName;
+    public static String minSdk;
+    public static String targetSdk;
 
     public static String getPIDzygotetwo() {
         return PIDzygotetwo;
@@ -87,5 +91,35 @@ public class TopAPPInfo {
         PackTopActivity = packTopActivity;
     }
 
+    public static String getVersionCode() {
+        return versionCode;
+    }
 
+    public static void setVersionCode(String versionCode) {
+        TopAPPInfo.versionCode = versionCode;
+    }
+
+    public static String getVersionName() {
+        return versionName;
+    }
+
+    public static void setVersionName(String versionName) {
+        TopAPPInfo.versionName = versionName;
+    }
+
+    public static String getMinSdk() {
+        return minSdk;
+    }
+
+    public static void setMinSdk(String minSdk) {
+        TopAPPInfo.minSdk = minSdk;
+    }
+
+    public static String getTargetSdk() {
+        return targetSdk;
+    }
+
+    public static void setTargetSdk(String targetSdk) {
+        TopAPPInfo.targetSdk = targetSdk;
+    }
 }

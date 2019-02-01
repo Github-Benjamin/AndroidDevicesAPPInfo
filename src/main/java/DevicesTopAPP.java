@@ -1,3 +1,6 @@
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * Created by Benjamin on 2018/12/4.
  */
@@ -12,6 +15,7 @@ public class DevicesTopAPP {
     public static String PackName,PackPath,GetTopAPPBit;
     public static String CompatibleOS = "";
     public static String GetTopAPPMainActivity = "adb shell dumpsys package " + PackName + " |grep -B5 android.intent.category.LAUNCHER  |grep filter";
+    public static String GetAppInfo = "adb shell dumpsys package " + PackName + "|grep version";
     public static String GetAPPPID = "adb shell ps " + CompatibleOS + " |grep "+ PackName ;
     public static String GetSystemPID = "adb shell ps  " + CompatibleOS + " |grep zygote64|head -1";
     public static String GetPmPath = "adb shell pm path " + PackName;
@@ -70,7 +74,6 @@ public class DevicesTopAPP {
             SetPID(CompatibleOS,PackName);
             return TopAPPInfo.getPackBit();
         }
-
     }
 
     public static void SetPID(String CompatibleOS,String PackName ){
@@ -131,17 +134,49 @@ public class DevicesTopAPP {
     }
 
 
+    // 获取 app versionName, versionCode, minSdk, targetSdk
+    public static String GetAppInfo(String PackName){
+        GetAppInfo = "adb shell dumpsys package " + PackName + "|grep version";
+        GetAppInfo = Main.CmdPull(GetAppInfo);
+        return GetAppInfo;
+    }
+
+    // 正则匹配 AppInfo,
+    public static String GetAppInfo(String GetAppInfo,String re) {
+        Pattern FindString = Pattern.compile(re);
+        Matcher FindStringInfo = FindString.matcher(GetAppInfo);
+        String FindSring;
+        if ( FindStringInfo.find( )) {
+            FindSring = FindStringInfo.group(1) ;
+        }else {
+            FindSring = null ;
+        }
+        return FindSring;
+    }
+
+    public static void SetAppInfo(String PackName){
+        GetAppInfo = GetAppInfo(PackName);
+        TopAPPInfo.setVersionCode(GetAppInfo(GetAppInfo,"versionCode=(\\d+)"));
+        TopAPPInfo.setVersionName(GetAppInfo(GetAppInfo,"versionName=(\\d+(\\.\\d+)*)"));
+        TopAPPInfo.setMinSdk(GetAppInfo(GetAppInfo,"minSdk=(\\d+)"));
+        TopAPPInfo.setTargetSdk(GetAppInfo(GetAppInfo,"targetSdk=(\\d+)"));
+    }
+
+
     public static void DoGetAPP() throws InterruptedException {
 
         GetPackNameThread t1 = new GetPackNameThread();
         GetTopAPPMainActivityThread t2 = new GetTopAPPMainActivityThread();
         GetTopAPPBitThread t3 = new GetTopAPPBitThread();
         GetPmPathThread t4 = new GetPmPathThread();
+        GetAppInfoThread t5 = new GetAppInfoThread();
+
 
         Thread thread1 = new Thread(t1);
         Thread thread2 = new Thread(t2);
         Thread thread3 = new Thread(t3);
         Thread thread4 = new Thread(t4);
+        Thread thread5 = new Thread(t5);
 
         thread1.start();
         thread1.join();
@@ -149,14 +184,18 @@ public class DevicesTopAPP {
         thread2.start();
         thread3.start();
         thread4.start();
+        thread5.start();
         thread2.join();
         thread3.join();
         thread4.join();
+        thread5.join();
 
     }
 
 
 }
+
+
 
 // 获取手机 第一界面APP包名
 class GetPackNameThread implements Runnable {
@@ -202,5 +241,15 @@ class GetPmPathThread implements Runnable {
         GetPmPath = Main.CmdPull(DevicesTopAPP.GetPmPath(PackName));
         String[]    GetPmPaths = GetPmPath.split("\n");
         TopAPPInfo.setPackPath(GetPmPaths[GetPmPaths.length-1].split(":")[1]);
+    }
+}
+
+
+// 获取APP versionName, versionCode, minSdk, targetSdk
+class GetAppInfoThread implements Runnable {
+    private static String PackName;
+    public void run() {
+        PackName = TopAPPInfo.getPackName();
+        DevicesTopAPP.SetAppInfo(PackName);
     }
 }

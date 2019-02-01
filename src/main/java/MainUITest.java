@@ -13,8 +13,8 @@ public class MainUITest extends JFrame implements ActionListener  {
     // 定义组件
     JButton EnterBtn,GetFile; // 定义确认按钮
     JMenuItem MenuAbout;
-    JLabel PackBit;
-    JTextField PackName,PackPath,PackMainActivity,PackTopActivity;
+    JLabel PackBit,versionCode, versionName, minSdk, targetSdk;
+    JTextField PackName,PackPath,Launchable_Activity,TopActivity;
     public static void main(String[] args) {
         MainUITest mUI=new MainUITest();
     }
@@ -41,23 +41,39 @@ public class MainUITest extends JFrame implements ActionListener  {
         PackBit = new JLabel("PackBit");
         getContentPane().add(PackBit);
 
-        getContentPane().add(new JLabel("PackMainActivity：", SwingConstants.CENTER ));
-        PackMainActivity = new JTextField("PackMainActivity",10);
-        getContentPane().add(PackMainActivity);
+        getContentPane().add(new JLabel("Launchable_Activity：", SwingConstants.CENTER ));
+        Launchable_Activity = new JTextField("Launchable_Activity",10);
+        getContentPane().add(Launchable_Activity);
 
-        getContentPane().add(new JLabel("PackTopActivity：", SwingConstants.CENTER ));
-        PackTopActivity = new JTextField("PackTopActivity",10);
-        getContentPane().add(PackTopActivity);
+        getContentPane().add(new JLabel("TopActivity：", SwingConstants.CENTER ));
+        TopActivity = new JTextField("TopActivity",10);
+        getContentPane().add(TopActivity);
 
         getContentPane().add(new JLabel("PackPath：", SwingConstants.CENTER ));
         PackPath = new JTextField("PackPath",10);
         getContentPane().add(PackPath);
 
+        // 新增 app versionCode, versionName, minSdk, targetSdk
+        getContentPane().add(new JLabel("versionCode：", SwingConstants.CENTER ));
+        versionCode = new JLabel("versionCode");
+        getContentPane().add(versionCode);
+
+        getContentPane().add(new JLabel("versionName：", SwingConstants.CENTER ));
+        versionName = new JLabel("versionName");
+        getContentPane().add(versionName);
+
+        getContentPane().add(new JLabel("minSdk：", SwingConstants.CENTER ));
+        minSdk = new JLabel("minSdk");
+        getContentPane().add(minSdk);
+
+        getContentPane().add(new JLabel("targetSdk：", SwingConstants.CENTER ));
+        targetSdk = new JLabel("targetSdk");
+        getContentPane().add(targetSdk);
+
         getContentPane().add(EnterBtn);
         getContentPane().add(GetFile);
 
-        //设置菜单栏
-        this.setJMenuBar(menuBar);
+        this.setJMenuBar(menuBar);	//设置菜单栏
         this.setLayout(new GridLayout(0,2));    //选择GridLayout布局管理器
         this.setTitle("AndroidAPP");
         this.setSize(350,300);
@@ -83,6 +99,7 @@ public class MainUITest extends JFrame implements ActionListener  {
         });
     }
 
+    // 界面按钮监听
     @Override
     public void actionPerformed(ActionEvent e) {
 
@@ -107,9 +124,15 @@ public class MainUITest extends JFrame implements ActionListener  {
             }
             PackName.setText(TopAPPInfo.getPackName());
             PackBit.setText(TopAPPInfo.getPackBit());
-            PackMainActivity.setText(TopAPPInfo.getPackMainActivity());
-            PackTopActivity.setText(TopAPPInfo.getPackTopActivity());
+            Launchable_Activity.setText(TopAPPInfo.getPackMainActivity());
+            TopActivity.setText(TopAPPInfo.getPackTopActivity());
             PackPath.setText(TopAPPInfo.getPackPath());
+
+            versionCode.setText(TopAPPInfo.getVersionCode());
+            versionName.setText(TopAPPInfo.getVersionName());
+            minSdk.setText(TopAPPInfo.getMinSdk());
+            targetSdk.setText(TopAPPInfo.getTargetSdk());
+
             return;
 
         }else if(e.getActionCommand()=="备份APK"){
