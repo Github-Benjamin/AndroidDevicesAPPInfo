@@ -24,6 +24,7 @@
     <!--</dependencies>-->
 
 
+
     <!-- java编译插件 -->
     <build>
         <plugins>
@@ -56,5 +57,7 @@
 
         </plugins>
     </build>
+
+
 
 </project>

@@ -54,13 +54,13 @@ public class MainUITest extends JFrame implements ActionListener  {
         getContentPane().add(PackPath);
 
         // 新增 app versionCode, versionName, minSdk, targetSdk
-        getContentPane().add(new JLabel("versionCode：", SwingConstants.CENTER ));
-        versionCode = new JLabel("versionCode");
-        getContentPane().add(versionCode);
-
         getContentPane().add(new JLabel("versionName：", SwingConstants.CENTER ));
         versionName = new JLabel("versionName");
         getContentPane().add(versionName);
+
+        getContentPane().add(new JLabel("versionCode：", SwingConstants.CENTER ));
+        versionCode = new JLabel("versionCode");
+        getContentPane().add(versionCode);
 
         getContentPane().add(new JLabel("minSdk：", SwingConstants.CENTER ));
         minSdk = new JLabel("minSdk");

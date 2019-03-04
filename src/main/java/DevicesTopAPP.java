@@ -78,7 +78,8 @@ public class DevicesTopAPP {
 
     public static void SetPID(String CompatibleOS,String PackName ){
         String PackNameResult = Main.CmdPull(GetAPPPID(CompatibleOS,PackName));
-        GetAPPPID = PackNameResult.split(" ")[9];
+
+        GetAPPPID = PackNameResult.split("\\s+")[2];
         TopAPPInfo.setPIDPackName(GetAPPPID);
 
         // 获取系统 64位zygote PID进程ID
@@ -87,13 +88,13 @@ public class DevicesTopAPP {
             // 解决获取多个64位zygote的情况的bug，导致判断程序位数不准确
                String[] testss = SystemResult.split("\n");
                if(testss.length == 1){
-                   SystemResult = SystemResult.split(" ")[11];
+                   SystemResult = SystemResult.split("\\s+")[1];
                    TopAPPInfo.setPIDzygote(SystemResult);
                }else if( testss.length ==2 ){
-                   SystemResult  = testss[0].split(" ")[11];
+                   SystemResult  = testss[0].split("\\s+")[1];
                    TopAPPInfo.setPIDzygote(SystemResult);
 
-                   SystemResult  = testss[1].split(" ")[11];
+                   SystemResult  = testss[1].split("\\s+")[1];
                    TopAPPInfo.setPIDzygotetwo(SystemResult);
                 }
         }catch (Exception e){
@@ -101,7 +102,12 @@ public class DevicesTopAPP {
         }
 
         // 通过获取程序PID与系统的64位PID对比判断是否是 64位 或 32位程序
-        if( TopAPPInfo.getPIDPackName().equals(TopAPPInfo.getPIDzygote()) ){
+
+        // 未做为空判断
+        if( TopAPPInfo.getPIDzygote().equals("") && TopAPPInfo.getPIDPackName().equals("") ){
+            TopAPPInfo.setPackBit("32位 程序");
+        }
+        else if( TopAPPInfo.getPIDPackName().equals(TopAPPInfo.getPIDzygote()) ){
             TopAPPInfo.setPackBit("64位 程序");
         }else if( TopAPPInfo.getPIDPackName().equals(TopAPPInfo.getPIDzygotetwo()) ){
             TopAPPInfo.setPackBit("64位 程序");
@@ -149,7 +155,7 @@ public class DevicesTopAPP {
         if ( FindStringInfo.find( )) {
             FindSring = FindStringInfo.group(1) ;
         }else {
-            FindSring = null ;
+            FindSring = "null" ;
         }
         return FindSring;
     }
@@ -170,7 +176,6 @@ public class DevicesTopAPP {
         GetTopAPPBitThread t3 = new GetTopAPPBitThread();
         GetPmPathThread t4 = new GetPmPathThread();
         GetAppInfoThread t5 = new GetAppInfoThread();
-
 
         Thread thread1 = new Thread(t1);
         Thread thread2 = new Thread(t2);
@@ -231,7 +236,7 @@ class GetTopAPPBitThread implements Runnable {
     }
 }
 
-// 获取顶层APP是否是 32位 或者 64位应用
+// 备份apk,存储apk路径
 class GetPmPathThread implements Runnable {
     private static String PackName;
     private static String GetPmPath;
