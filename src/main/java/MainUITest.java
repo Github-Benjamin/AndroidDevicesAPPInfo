@@ -11,8 +11,8 @@ import java.awt.event.ActionListener;
 public class MainUITest extends JFrame implements ActionListener  {
 
     // 定义组件
-    JButton EnterBtn,GetFile; // 定义确认按钮
-    JMenuItem MenuAbout;
+    JButton EnterBtn,GetFile,StartBtn,CloseBtn,CleanAndStartBtn,ScreenshotBtn; // 定义确认按钮
+    JMenuItem MenuScreenshot,MenuAbout;
     JLabel PackBit,versionCode, versionName, minSdk, targetSdk;
     JTextField PackName,PackPath,Launchable_Activity,TopActivity;
     public static void main(String[] args) {
@@ -24,15 +24,28 @@ public class MainUITest extends JFrame implements ActionListener  {
         // 创建组件并设置监听
         EnterBtn = new JButton("获取APK信息");
         GetFile = new JButton("备份APK");
+//        StartBtn = new JButton("启动");
+        CloseBtn = new JButton("关闭当前程序");
+        CleanAndStartBtn = new JButton("清除数据并启动");
+//        ScreenshotBtn = new JButton("截图");
+
         EnterBtn.addActionListener(this);
         GetFile.addActionListener(this);
+//        StartBtn.addActionListener(this);
+        CloseBtn.addActionListener(this);
+        CleanAndStartBtn.addActionListener(this);
+//        ScreenshotBtn.addActionListener(this);
 
         //初始化一个菜单栏
-        JMenuBar menuBar = new JMenuBar();
+        JMenuBar menuAbout = new JMenuBar();
         MenuAbout = new JMenuItem("About");
-        menuBar.add(MenuAbout);
+        JMenuBar menuScreenshot = new JMenuBar();
+        MenuScreenshot = new JMenuItem("截图");
+        menuAbout.add(MenuScreenshot);
+        menuAbout.add(MenuAbout);
         myEvent();  // 加载菜单栏监听事件处理
 
+        // 信息栏选项
         getContentPane().add(new JLabel("PackName：", SwingConstants.CENTER ));
         PackName = new JTextField("PackName",10);
         getContentPane().add(PackName);
@@ -70,13 +83,18 @@ public class MainUITest extends JFrame implements ActionListener  {
         targetSdk = new JLabel("targetSdk");
         getContentPane().add(targetSdk);
 
+        // 添加按钮
         getContentPane().add(EnterBtn);
         getContentPane().add(GetFile);
+        getContentPane().add(CloseBtn);
+        getContentPane().add(CleanAndStartBtn);
 
-        this.setJMenuBar(menuBar);	//设置菜单栏
+        this.setJMenuBar(menuScreenshot);	//设置菜单栏 截图
+        this.setJMenuBar(menuAbout);	//设置菜单栏 关于
+
         this.setLayout(new GridLayout(0,2));    //选择GridLayout布局管理器
         this.setTitle("AndroidAPP");
-        this.setSize(350,300);
+        this.setSize(400,320);
         this.setLocation(0, 0);
         this.setLocationRelativeTo(null);//窗体居中显示
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);    //设置当关闭窗口时，保证JVM也退出
@@ -88,15 +106,29 @@ public class MainUITest extends JFrame implements ActionListener  {
     // 菜单栏监听
     private void myEvent()
     {
-        // About 菜单栏监听
-        MenuAbout.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
-                JOptionPane.showMessageDialog(null, "Author: Benjamin\nWeChat: WeChat_Benjamin\nEmail: Benjamin_v@qq.com", "AboutInfo",JOptionPane.INFORMATION_MESSAGE);
+
+        // 截图
+        MenuScreenshot.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                ScreenshotUtil.ScreencapShot();
+                if( TopAPPInfo.getScreencapStatus().equals("Success") == false ){
+                    JOptionPane.showMessageDialog(null, "Screenshot Error!\nPlease Check You Phone USB Connect." , "Faild",JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
+                JOptionPane.showMessageDialog(null, "Please Check Jar Current Path File: \nFileName:    screenshot" + TopAPPInfo.getScreencapTime()+".png" , "Success",JOptionPane.INFORMATION_MESSAGE);
                 return;
             }
         });
+
+
+        // About
+        MenuAbout.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            JOptionPane.showMessageDialog(null, "Author: Benjamin\nWeChat: WeChat_Benjamin\nEmail: Benjamin_v@qq.com", "AboutInfo",JOptionPane.INFORMATION_MESSAGE);
+            return;
+            }
+        });
+
     }
 
     // 界面按钮监听
@@ -114,6 +146,7 @@ public class MainUITest extends JFrame implements ActionListener  {
             JOptionPane.showMessageDialog(null,DevicesInfo.getAdbDevices(),"提示消息",JOptionPane.WARNING_MESSAGE);
             return;
         }
+
 
         if(e.getActionCommand()=="获取APK信息") {
 
@@ -146,7 +179,30 @@ public class MainUITest extends JFrame implements ActionListener  {
                 return;
             }
 
+        }else if(e.getActionCommand()=="清除数据并启动"){
+
+            if(TopAPPInfo.getPackPath() == null | TopAPPInfo.getPackPath() == ""){
+                JOptionPane.showMessageDialog(null,"请先获取APK信息！","提示消息",JOptionPane.WARNING_MESSAGE);
+            }else {
+                //执行cmd命令, 清除、启动
+                DevicesTopAPP.CleanAPP(TopAPPInfo.getPackName());
+                DevicesTopAPP.StartAPPLaunchableActivity(TopAPPInfo.getPackMainActivity());
+                return;
+            }
+
+        }else if(e.getActionCommand()=="关闭当前程序"){
+
+            if(TopAPPInfo.getPackPath() == null | TopAPPInfo.getPackPath() == ""){
+                JOptionPane.showMessageDialog(null,"请先获取APK信息！","提示消息",JOptionPane.WARNING_MESSAGE);
+            }else {
+                //执行cmd命令,关闭当前程序
+                DevicesTopAPP.CloseAPP(TopAPPInfo.getPackName());
+                return;
+            }
+
         }
+
+
 
     }
 

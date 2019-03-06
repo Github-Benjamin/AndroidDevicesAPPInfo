@@ -1,12 +1,4 @@
-DevicesTopAPP.class
-GetMemTotalThread.class
-GetTopAPPMainActivityThread.class
 GetBrandThread.class
-GetCPUNameThread.class
-GetOSVersionThread.class
-GetCPUBitThread.class
-GetPackNameThread.class
-GetPmPathThread.class
 GetAdbDevicesThread.class
 GetModelThread.class
 Main.class
@@ -19,3 +11,11 @@ GetScreenSizeThread.class
 MainUI.class
 GetTotalMemThread.class
 StreamCaptureThread.class
+DevicesTopAPP.class
+GetMemTotalThread.class
+GetTopAPPMainActivityThread.class
+GetCPUNameThread.class
+GetOSVersionThread.class
+GetCPUBitThread.class
+GetPackNameThread.class
+GetPmPathThread.class

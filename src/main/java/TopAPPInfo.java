@@ -19,6 +19,9 @@ public class TopAPPInfo {
     public static String minSdk;
     public static String targetSdk;
 
+    public static String ScreencapTime;
+    public static String ScreencapStatus;
+
     public static String getPIDzygotetwo() {
         return PIDzygotetwo;
     }
@@ -121,5 +124,21 @@ public class TopAPPInfo {
 
     public static void setTargetSdk(String targetSdk) {
         TopAPPInfo.targetSdk = targetSdk;
+    }
+
+    public static String getScreencapTime() {
+        return ScreencapTime;
+    }
+
+    public static void setScreencapTime(String screencapTime) {
+        ScreencapTime = screencapTime;
+    }
+
+    public static String getScreencapStatus() {
+        return ScreencapStatus;
+    }
+
+    public static void setScreencapStatus(String screencapStatus) {
+        ScreencapStatus = screencapStatus;
     }
 }

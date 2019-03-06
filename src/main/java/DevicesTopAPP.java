@@ -1,18 +1,16 @@
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+
 /**
  * Created by Benjamin on 2018/12/4.
  */
 
-
-
 public class DevicesTopAPP {
-
 
     public static String GetAdbDevices = "adb devices";
     public static String GetTopAPP = "adb shell dumpsys activity activities  |grep -i hist |grep visible=true -1";
-    public static String PackName,PackPath,GetTopAPPBit;
+    public static String PackName,PackPath,PackMainActivity;
     public static String CompatibleOS = "";
     public static String GetTopAPPMainActivity = "adb shell dumpsys package " + PackName + " |grep -B5 android.intent.category.LAUNCHER  |grep filter";
     public static String GetAppInfo = "adb shell dumpsys package " + PackName + "|grep version";
@@ -20,8 +18,10 @@ public class DevicesTopAPP {
     public static String GetSystemPID = "adb shell ps  " + CompatibleOS + " |grep zygote64|head -1";
     public static String GetPmPath = "adb shell pm path " + PackName;
     public static String GetPullFile = "adb pull " + PackPath + " "+ PackName + ".apk";
+    public static String CloseAPP = "adb shell am force-stop" + PackName;
+    public static String CleanAPP = "adb shell am force-stop " + PackName;
+    public static String StartAPP = "adb shell am start -n" + PackMainActivity;
     private static String SystemResult;
-
 
 //    public static void main(String[] args) {
 //
@@ -48,13 +48,13 @@ public class DevicesTopAPP {
 //
 //    }
 
-
-
+    // 获取顶层APP的launcher信息
     public static String GetTopAPPMainActivity(String PackName){
         GetTopAPPMainActivity = "adb shell dumpsys package " + PackName + " |grep -B5 android.intent.category.LAUNCHER  |grep filter";
         return GetTopAPPMainActivity;
     }
 
+    // 设置顶层APP的launcher_activity
     public static String SetTopAPPMainActivity(String GetTopAPPMainActivity){
         try {
             GetTopAPPMainActivity = GetTopAPPMainActivity.split(" ")[9];
@@ -64,6 +64,7 @@ public class DevicesTopAPP {
         }
     }
 
+    // 获取APP的进程PID
     public static String GetTopAPPBit(String PackName){
         String PackNameResult = Main.CmdPull(GetAPPPID(CompatibleOS,PackName));
         if( PackNameResult.length() < 10 ){
@@ -76,6 +77,7 @@ public class DevicesTopAPP {
         }
     }
 
+    // 根据获取到的 系统进程PID 与 应用程序PID 判断运行程序的位数
     public static void SetPID(String CompatibleOS,String PackName ){
         String PackNameResult = Main.CmdPull(GetAPPPID(CompatibleOS,PackName));
 
@@ -133,12 +135,34 @@ public class DevicesTopAPP {
         return GetPmPath;
     }
 
+    // 执行备份文件命令
     public static String GetPullFile(String PackPath, String PackName){
         GetPullFile = "adb pull " + PackPath + " "+ PackName + ".apk";
         GetPullFile = Main.CmdPull(GetPullFile);
         return GetPullFile;
     }
 
+
+    // 执行关闭APP命令
+    public static String CloseAPP(String PackName){
+        CloseAPP = "adb shell am force-stop " + PackName;
+        CloseAPP = Main.CmdPull(CloseAPP);
+        return CloseAPP;
+    }
+
+    // 执行清理APP缓存命令
+    public static String CleanAPP(String PackName){
+        CleanAPP = "adb shell pm clear " + PackName;
+        CleanAPP = Main.CmdPull(CleanAPP);
+        return CleanAPP;
+    }
+
+    // 执行启动APP命令
+    public static String StartAPPLaunchableActivity(String LaunchableActivity){
+        StartAPP = "adb shell am start -n" + LaunchableActivity;
+        StartAPP = Main.CmdPull(StartAPP);
+        return StartAPP;
+    }
 
     // 获取 app versionName, versionCode, minSdk, targetSdk
     public static String GetAppInfo(String PackName){
@@ -149,6 +173,8 @@ public class DevicesTopAPP {
 
     // 正则匹配 AppInfo,
     public static String GetAppInfo(String GetAppInfo,String re) {
+
+
         Pattern FindString = Pattern.compile(re);
         Matcher FindStringInfo = FindString.matcher(GetAppInfo);
         String FindSring;
@@ -160,6 +186,7 @@ public class DevicesTopAPP {
         return FindSring;
     }
 
+    // adb命令执行后，设置实例对象的值
     public static void SetAppInfo(String PackName){
         GetAppInfo = GetAppInfo(PackName);
         TopAPPInfo.setVersionCode(GetAppInfo(GetAppInfo,"versionCode=(\\d+)"));
@@ -168,9 +195,8 @@ public class DevicesTopAPP {
         TopAPPInfo.setTargetSdk(GetAppInfo(GetAppInfo,"targetSdk=(\\d+)"));
     }
 
-
+    // 获取信息主线程组
     public static void DoGetAPP() throws InterruptedException {
-
         GetPackNameThread t1 = new GetPackNameThread();
         GetTopAPPMainActivityThread t2 = new GetTopAPPMainActivityThread();
         GetTopAPPBitThread t3 = new GetTopAPPBitThread();
@@ -190,16 +216,15 @@ public class DevicesTopAPP {
         thread3.start();
         thread4.start();
         thread5.start();
+
         thread2.join();
         thread3.join();
         thread4.join();
         thread5.join();
-
     }
 
 
 }
-
 
 
 // 获取手机 第一界面APP包名
