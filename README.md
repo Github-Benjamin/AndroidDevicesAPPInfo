@@ -2,8 +2,12 @@
 
 # AndroidDevicesInfo
 
-## Java GUI工具 - 获取Android设备系统信息程序；
-## Java GUI工具 - 获取Android设备最顶层应用程序相关信息，并提供备份功能；
+#### Java GUI工具 - 获取Android设备系统信息程序；
+#### Java GUI工具 - 获取Android设备最顶层应用程序相关信息，并提供备份功能；
+
+
+
+#### 项目详细描述请转移至：https://testerhome.com/opensource_projects/android-app-testtools
 
 
 

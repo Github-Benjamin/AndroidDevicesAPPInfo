@@ -154,6 +154,19 @@ public class DevicesTopAPP {
     public static String CleanAPP(String PackName){
         CleanAPP = "adb shell pm clear " + PackName;
         CleanAPP = Main.CmdPull(CleanAPP);
+
+        System.out.println(CleanAPP);
+        // 判断清理是否成功
+        if (CleanAPP.indexOf("Error")!=-1){
+            // -1 不包含，其他为包含
+            // 包含错误信息时
+            TopAPPInfo.setClearStatus("Faild");
+
+        }else{
+            // 不包含错误信息时
+            TopAPPInfo.setClearStatus("Success");
+        }
+
         return CleanAPP;
     }
 

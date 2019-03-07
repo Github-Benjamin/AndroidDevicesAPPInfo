@@ -186,6 +186,10 @@ public class MainUITest extends JFrame implements ActionListener  {
             }else {
                 //执行cmd命令, 清除、启动
                 DevicesTopAPP.CleanAPP(TopAPPInfo.getPackName());
+                if( TopAPPInfo.getClearStatus().equals("Success") == false ) {
+                    JOptionPane.showMessageDialog(null,"Error: java.lang.SecurityException\ndoes not have permission android.permission.CLEAR_APP_USER_DATA to clear data","Error!",JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
                 DevicesTopAPP.StartAPPLaunchableActivity(TopAPPInfo.getPackMainActivity());
                 return;
             }

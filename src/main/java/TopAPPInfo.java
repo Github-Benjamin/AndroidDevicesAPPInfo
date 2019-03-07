@@ -22,6 +22,8 @@ public class TopAPPInfo {
     public static String ScreencapTime;
     public static String ScreencapStatus;
 
+    public static String ClearStatus;
+
     public static String getPIDzygotetwo() {
         return PIDzygotetwo;
     }
@@ -140,5 +142,13 @@ public class TopAPPInfo {
 
     public static void setScreencapStatus(String screencapStatus) {
         ScreencapStatus = screencapStatus;
+    }
+
+    public static String getClearStatus() {
+        return ClearStatus;
+    }
+
+    public static void setClearStatus(String clearStatus) {
+        ClearStatus = clearStatus;
     }
 }
