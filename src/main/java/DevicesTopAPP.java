@@ -282,8 +282,9 @@ class GetPmPathThread implements Runnable {
         // 备份apk,存储apk路径
         PackName = TopAPPInfo.getPackName();
         GetPmPath = Main.CmdPull(DevicesTopAPP.GetPmPath(PackName));
+
         String[]    GetPmPaths = GetPmPath.split("\n");
-        TopAPPInfo.setPackPath(GetPmPaths[GetPmPaths.length-1].split(":")[1]);
+        TopAPPInfo.setPackPath(GetPmPaths[0].split(":")[1]);
     }
 }
 
