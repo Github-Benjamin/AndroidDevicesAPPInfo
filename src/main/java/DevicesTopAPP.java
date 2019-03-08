@@ -20,6 +20,7 @@ public class DevicesTopAPP {
     public static String GetPullFile = "adb pull " + PackPath + " "+ PackName + ".apk";
     public static String CloseAPP = "adb shell am force-stop" + PackName;
     public static String CleanAPP = "adb shell am force-stop " + PackName;
+    public static String UninstallAPP = "adb uninstall" + PackName;
     public static String StartAPP = "adb shell am start -n" + PackMainActivity;
     private static String SystemResult;
 
@@ -154,8 +155,6 @@ public class DevicesTopAPP {
     public static String CleanAPP(String PackName){
         CleanAPP = "adb shell pm clear " + PackName;
         CleanAPP = Main.CmdPull(CleanAPP);
-
-        System.out.println(CleanAPP);
         // 判断清理是否成功
         if (CleanAPP.indexOf("Error")!=-1){
             // -1 不包含，其他为包含
@@ -166,7 +165,6 @@ public class DevicesTopAPP {
             // 不包含错误信息时
             TopAPPInfo.setClearStatus("Success");
         }
-
         return CleanAPP;
     }
 
@@ -175,6 +173,25 @@ public class DevicesTopAPP {
         StartAPP = "adb shell am start -n" + LaunchableActivity;
         StartAPP = Main.CmdPull(StartAPP);
         return StartAPP;
+    }
+
+    // 执行卸载APP命令
+    public static String UninstallAPP(String PackName){
+        UninstallAPP = "adb uninstall " + PackName;
+        UninstallAPP = Main.CmdPull(UninstallAPP);
+
+
+
+        // 判断卸载是否成功
+        if (UninstallAPP.indexOf("Failure")!=-1 || UninstallAPP.indexOf("Exception") != -1 ){
+            // -1 不包含，其他为包含
+            // 包含错误信息时
+            TopAPPInfo.setUninstallStatus(UninstallAPP);
+        }else{
+            // 不包含错误信息时
+            TopAPPInfo.setUninstallStatus("Success");
+        }
+        return UninstallAPP;
     }
 
     // 获取 app versionName, versionCode, minSdk, targetSdk
@@ -283,7 +300,7 @@ class GetPmPathThread implements Runnable {
         PackName = TopAPPInfo.getPackName();
         GetPmPath = Main.CmdPull(DevicesTopAPP.GetPmPath(PackName));
         String[]    GetPmPaths = GetPmPath.split("\n");
-        TopAPPInfo.setPackPath(GetPmPaths[GetPmPaths.length-1].split(":")[1]);
+        TopAPPInfo.setPackPath(GetPmPaths[0].split(":")[1]);
     }
 }
 

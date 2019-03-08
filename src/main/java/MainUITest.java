@@ -12,7 +12,7 @@ public class MainUITest extends JFrame implements ActionListener  {
 
     // 定义组件
     JButton EnterBtn,GetFile,StartBtn,CloseBtn,CleanAndStartBtn,ScreenshotBtn; // 定义确认按钮
-    JMenuItem MenuScreenshot,MenuAbout;
+    JMenuItem MenuUninstall,MenuScreenshot,MenuAbout;
     JLabel PackBit,versionCode, versionName, minSdk, targetSdk;
     JTextField PackName,PackPath,Launchable_Activity,TopActivity;
     public static void main(String[] args) {
@@ -41,7 +41,10 @@ public class MainUITest extends JFrame implements ActionListener  {
         MenuAbout = new JMenuItem("About");
         JMenuBar menuScreenshot = new JMenuBar();
         MenuScreenshot = new JMenuItem("截图");
+        JMenuBar menuUninstall = new JMenuBar();
+        MenuUninstall = new JMenuItem("卸载");
         menuAbout.add(MenuScreenshot);
+        menuAbout.add(MenuUninstall);
         menuAbout.add(MenuAbout);
         myEvent();  // 加载菜单栏监听事件处理
 
@@ -120,6 +123,25 @@ public class MainUITest extends JFrame implements ActionListener  {
             }
         });
 
+        // 卸载
+        MenuUninstall.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if(TopAPPInfo.getPackPath() == null | TopAPPInfo.getPackPath() == ""){
+                    JOptionPane.showMessageDialog(null,"请先获取APK信息！","提示消息",JOptionPane.WARNING_MESSAGE);
+                }else {
+                    //执行卸载APP
+                    DevicesTopAPP.UninstallAPP(TopAPPInfo.getPackName());
+                    if( TopAPPInfo.getUninstallStatus().equals("Success") == false ){
+                        JOptionPane.showMessageDialog(null, TopAPPInfo.getUninstallStatus() , "Faild",JOptionPane.WARNING_MESSAGE);
+                        return;
+                    }else {
+                        JOptionPane.showMessageDialog(null, "Uninstall Sucess PackName: " + TopAPPInfo.getPackName() , "Sucess",JOptionPane.INFORMATION_MESSAGE);
+                        return;
+                    }
+                }
+            }
+        });
+
 
         // About
         MenuAbout.addActionListener(new ActionListener() {
@@ -128,6 +150,7 @@ public class MainUITest extends JFrame implements ActionListener  {
             return;
             }
         });
+
 
     }
 
