@@ -96,7 +96,7 @@ public class MainUITest extends JFrame implements ActionListener  {
         this.setJMenuBar(menuAbout);	//设置菜单栏 关于
 
         this.setLayout(new GridLayout(0,2));    //选择GridLayout布局管理器
-        this.setTitle("AndroidAPP");
+        this.setTitle("APP-TestTools");
         this.setSize(400,320);
         this.setLocation(0, 0);
         this.setLocationRelativeTo(null);//窗体居中显示
@@ -198,6 +198,12 @@ public class MainUITest extends JFrame implements ActionListener  {
             }else {
                 //执行pull备份到本地
                 DevicesTopAPP.GetPullFile(TopAPPInfo.getPackPath(),TopAPPInfo.getPackName());
+
+                if( TopAPPInfo.getPullStatus().equals("Success") == false ){
+                    JOptionPane.showMessageDialog(null,TopAPPInfo.getPullStatus(),"Error!",JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
+
                 JOptionPane.showMessageDialog(null,"备份成功，请查看本地目录！","提示消息",JOptionPane.WARNING_MESSAGE);
                 return;
             }
@@ -210,7 +216,7 @@ public class MainUITest extends JFrame implements ActionListener  {
                 //执行cmd命令, 清除、启动
                 DevicesTopAPP.CleanAPP(TopAPPInfo.getPackName());
                 if( TopAPPInfo.getClearStatus().equals("Success") == false ) {
-                    JOptionPane.showMessageDialog(null,"Error: java.lang.SecurityException\ndoes not have permission android.permission.CLEAR_APP_USER_DATA to clear data","Error!",JOptionPane.WARNING_MESSAGE);
+                    JOptionPane.showMessageDialog(null,TopAPPInfo.getClearStatus(),"Error!",JOptionPane.WARNING_MESSAGE);
                     return;
                 }
                 DevicesTopAPP.StartAPPLaunchableActivity(TopAPPInfo.getPackMainActivity());

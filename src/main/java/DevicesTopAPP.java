@@ -140,6 +140,16 @@ public class DevicesTopAPP {
     public static String GetPullFile(String PackPath, String PackName){
         GetPullFile = "adb pull " + PackPath + " "+ PackName + ".apk";
         GetPullFile = Main.CmdPull(GetPullFile);
+        // 判断备份是否成功
+        if (GetPullFile.indexOf("error")!=-1){
+            // -1 不包含，其他为包含
+            // 包含错误信息时
+            TopAPPInfo.setPullStatus(GetPullFile);
+
+        }else{
+            // 不包含错误信息时
+            TopAPPInfo.setPullStatus("Success");
+        }
         return GetPullFile;
     }
 
@@ -159,7 +169,7 @@ public class DevicesTopAPP {
         if (CleanAPP.indexOf("Error")!=-1){
             // -1 不包含，其他为包含
             // 包含错误信息时
-            TopAPPInfo.setClearStatus("Faild");
+            TopAPPInfo.setClearStatus(CleanAPP);
 
         }else{
             // 不包含错误信息时
@@ -299,7 +309,6 @@ class GetPmPathThread implements Runnable {
         // 备份apk,存储apk路径
         PackName = TopAPPInfo.getPackName();
         GetPmPath = Main.CmdPull(DevicesTopAPP.GetPmPath(PackName));
-
         String[]    GetPmPaths = GetPmPath.split("\n");
         TopAPPInfo.setPackPath(GetPmPaths[0].split(":")[1]);
     }

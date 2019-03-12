@@ -24,6 +24,7 @@ public class TopAPPInfo {
 
     public static String ClearStatus;
     public static String UninstallStatus;
+    public static String PullStatus;
 
     public static String getPIDzygotetwo() {
         return PIDzygotetwo;
@@ -159,5 +160,13 @@ public class TopAPPInfo {
 
     public static void setUninstallStatus(String uninstallStatus) {
         UninstallStatus = uninstallStatus;
+    }
+
+    public static String getPullStatus() {
+        return PullStatus;
+    }
+
+    public static void setPullStatus(String pullStatus) {
+        PullStatus = pullStatus;
     }
 }
