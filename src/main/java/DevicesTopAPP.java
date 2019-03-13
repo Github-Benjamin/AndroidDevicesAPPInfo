@@ -153,7 +153,6 @@ public class DevicesTopAPP {
         return GetPullFile;
     }
 
-
     // 执行关闭APP命令
     public static String CloseAPP(String PackName){
         CloseAPP = "adb shell am force-stop " + PackName;
@@ -190,8 +189,6 @@ public class DevicesTopAPP {
         UninstallAPP = "adb uninstall " + PackName;
         UninstallAPP = Main.CmdPull(UninstallAPP);
 
-
-
         // 判断卸载是否成功
         if (UninstallAPP.indexOf("Failure")!=-1 || UninstallAPP.indexOf("Exception") != -1 ){
             // -1 不包含，其他为包含
@@ -213,8 +210,6 @@ public class DevicesTopAPP {
 
     // 正则匹配 AppInfo,
     public static String GetAppInfo(String GetAppInfo,String re) {
-
-
         Pattern FindString = Pattern.compile(re);
         Matcher FindStringInfo = FindString.matcher(GetAppInfo);
         String FindSring;

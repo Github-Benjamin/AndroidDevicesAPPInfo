@@ -114,6 +114,7 @@ public class MainUITest extends JFrame implements ActionListener  {
         MenuScreenshot.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 ScreenshotUtil.ScreencapShot();
+                // 截图判断是否成功
                 if( TopAPPInfo.getScreencapStatus().equals("Success") == false ){
                     JOptionPane.showMessageDialog(null, "Screenshot Error!\nPlease Check You Phone USB Connect." , "Faild",JOptionPane.WARNING_MESSAGE);
                     return;
@@ -129,7 +130,7 @@ public class MainUITest extends JFrame implements ActionListener  {
                 if(TopAPPInfo.getPackPath() == null | TopAPPInfo.getPackPath() == ""){
                     JOptionPane.showMessageDialog(null,"请先获取APK信息！","提示消息",JOptionPane.WARNING_MESSAGE);
                 }else {
-                    //执行卸载APP
+                    // 执行卸载APP
                     DevicesTopAPP.UninstallAPP(TopAPPInfo.getPackName());
                     if( TopAPPInfo.getUninstallStatus().equals("Success") == false ){
                         JOptionPane.showMessageDialog(null, TopAPPInfo.getUninstallStatus() , "Faild",JOptionPane.WARNING_MESSAGE);
