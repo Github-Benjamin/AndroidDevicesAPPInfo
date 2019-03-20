@@ -190,7 +190,7 @@ public class DevicesTopAPP {
         UninstallAPP = Main.CmdPull(UninstallAPP);
 
         // 判断卸载是否成功
-        if (UninstallAPP.indexOf("Failure")!=-1 || UninstallAPP.indexOf("Exception") != -1 ){
+        if (UninstallAPP.indexOf("Failure")!=-1 || UninstallAPP.indexOf("Exception") != -1 || UninstallAPP.indexOf("error") != -1 ){
             // -1 不包含，其他为包含
             // 包含错误信息时
             TopAPPInfo.setUninstallStatus(UninstallAPP);

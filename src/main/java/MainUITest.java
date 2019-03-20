@@ -127,8 +127,22 @@ public class MainUITest extends JFrame implements ActionListener  {
         // 卸载
         MenuUninstall.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+
+                // 获取设备信息；fix uninstall APP bug
+                try {
+                    Main.GetDevicesStatus();
+                } catch (InterruptedException e1) {
+                    e1.printStackTrace();
+                }
+
+                if( DevicesInfo.getAdbDevices().equals("Success") == false ) {
+                    JOptionPane.showMessageDialog(null,DevicesInfo.getAdbDevices(),"提示消息",JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
+
                 if(TopAPPInfo.getPackPath() == null | TopAPPInfo.getPackPath() == ""){
                     JOptionPane.showMessageDialog(null,"请先获取APK信息！","提示消息",JOptionPane.WARNING_MESSAGE);
+                    return;
                 }else {
                     // 执行卸载APP
                     DevicesTopAPP.UninstallAPP(TopAPPInfo.getPackName());
@@ -170,7 +184,6 @@ public class MainUITest extends JFrame implements ActionListener  {
             JOptionPane.showMessageDialog(null,DevicesInfo.getAdbDevices(),"提示消息",JOptionPane.WARNING_MESSAGE);
             return;
         }
-
 
         if(e.getActionCommand()=="获取APK信息") {
 
