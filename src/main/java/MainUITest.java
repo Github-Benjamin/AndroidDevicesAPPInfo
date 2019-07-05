@@ -12,7 +12,7 @@ public class MainUITest extends JFrame implements ActionListener  {
 
     // 定义组件
     JButton EnterBtn,GetFile,StartBtn,CloseBtn,CleanAndStartBtn,ScreenshotBtn; // 定义确认按钮
-    JMenuItem MenuUninstall,MenuScreenshot,MenuAbout;
+    JMenuItem MenuUninstall,MenuScreenshot,MenuGetLog,MenuAbout;
     JLabel PackBit,versionCode, versionName, minSdk, targetSdk;
     JTextField PackName,PackPath,Launchable_Activity,TopActivity;
     public static void main(String[] args) {
@@ -41,9 +41,12 @@ public class MainUITest extends JFrame implements ActionListener  {
         MenuAbout = new JMenuItem("About");
         JMenuBar menuScreenshot = new JMenuBar();
         MenuScreenshot = new JMenuItem("截图");
+//        JMenuBar menuGetLog = new JMenuBar();
+//        MenuGetLog = new JMenuItem("GetLog");
         JMenuBar menuUninstall = new JMenuBar();
         MenuUninstall = new JMenuItem("卸载");
         menuAbout.add(MenuScreenshot);
+//        menuAbout.add(MenuGetLog);
         menuAbout.add(MenuUninstall);
         menuAbout.add(MenuAbout);
         myEvent();  // 加载菜单栏监听事件处理
@@ -93,6 +96,8 @@ public class MainUITest extends JFrame implements ActionListener  {
         getContentPane().add(CleanAndStartBtn);
 
         this.setJMenuBar(menuScreenshot);	//设置菜单栏 截图
+//        this.setJMenuBar(menuGetLog);
+        this.setJMenuBar(menuUninstall);
         this.setJMenuBar(menuAbout);	//设置菜单栏 关于
 
         this.setLayout(new GridLayout(0,2));    //选择GridLayout布局管理器
@@ -123,6 +128,18 @@ public class MainUITest extends JFrame implements ActionListener  {
                 return;
             }
         });
+
+//        // 获取日志
+//        MenuGetLog.addActionListener(new ActionListener() {
+//            public void actionPerformed(ActionEvent e) {
+//                try {
+//                    GetLogUtil.GetLog();
+//                } catch (InterruptedException e1) {
+//                    e1.printStackTrace();
+//                }
+//            }
+//        });
+
 
         // 卸载
         MenuUninstall.addActionListener(new ActionListener() {

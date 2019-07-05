@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -10,6 +11,7 @@ public class ScreenshotUtil {
     public static String RmImage = "adb shell rm -rf /sdcard/screenshot.png";
     public static String Screencap = "adb shell screencap -p /sdcard/screenshot.png";
     public static String PullImage = "adb pull /sdcard/screenshot.png /Users/xielianshi/Desktop";
+
 
 //    // 获取当前Unix时间戳
 //    public static String GetNowTimeStamp(){
@@ -56,6 +58,7 @@ public class ScreenshotUtil {
         RmImage = Main.CmdPull(RmImage);
         return RmImage;
     }
+
 
     // 操作方法组合
     public static String ScreencapShot(){

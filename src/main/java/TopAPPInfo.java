@@ -8,9 +8,11 @@ public class TopAPPInfo {
     public static String AdbDevices;
     public static String PackName;
     public static String PackPath;
+    public static String mCurrentFocus;
     public static String PIDzygote;
     public static String PIDzygotetwo;
     public static String PIDPackName;
+    public static String PIDPackageName;
     public static String PackMainActivity;
     public static String PackTopActivity;
     public static String PackBit;
@@ -66,6 +68,14 @@ public class TopAPPInfo {
         PackPath = packPath;
     }
 
+    public static String getmCurrentFocus() {
+        return mCurrentFocus;
+    }
+
+    public static void setmCurrentFocus(String mCurrentFocus) {
+        TopAPPInfo.mCurrentFocus = mCurrentFocus;
+    }
+
     public static String getPIDzygote() {
         return PIDzygote;
     }
@@ -80,6 +90,14 @@ public class TopAPPInfo {
 
     public static void setPIDPackName(String PIDPackName) {
         TopAPPInfo.PIDPackName = PIDPackName;
+    }
+
+    public static String getPIDPackageName() {
+        return PIDPackageName;
+    }
+
+    public static void setPIDPackageName(String PIDPackageName) {
+        TopAPPInfo.PIDPackageName = PIDPackageName;
     }
 
     public static String getPackMainActivity() {

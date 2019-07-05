@@ -19,10 +19,11 @@ public class DevicesTopAPP {
     public static String GetPmPath = "adb shell pm path " + PackName;
     public static String GetPullFile = "adb pull " + PackPath + " "+ PackName + ".apk";
     public static String CloseAPP = "adb shell am force-stop" + PackName;
-    public static String CleanAPP = "adb shell am force-stop " + PackName;
+    public static String CleanAPP = "adb shell am clear " + PackName;
     public static String UninstallAPP = "adb uninstall" + PackName;
     public static String StartAPP = "adb shell am start -n" + PackMainActivity;
     private static String SystemResult;
+    private static String mCurrentFocus = "adb shell dumpsys window | grep mCurrentFocus";
 
 //    public static void main(String[] args) {
 //
@@ -80,13 +81,21 @@ public class DevicesTopAPP {
 
     // 根据获取到的 系统进程PID 与 应用程序PID 判断运行程序的位数
     public static void SetPID(String CompatibleOS,String PackName ){
-        String PackNameResult = Main.CmdPull(GetAPPPID(CompatibleOS,PackName));
 
+        // 获取APP PackName PID进程ID
+        String PackNameResult = Main.CmdPull(GetAPPPID(CompatibleOS,PackName));
         GetAPPPID = PackNameResult.split("\\s+")[2];
+
+        TopAPPInfo.setPIDPackageName(PackNameResult.split("\\s+")[0]);
         TopAPPInfo.setPIDPackName(GetAPPPID);
 
         // 获取系统 64位zygote PID进程ID
         SystemResult = Main.CmdPull(GetSystemPID(CompatibleOS));
+
+        // 打印命令执行结果 > adb shell ps|grep zygote64 && adb shell ps|grep <PIDPackageName>
+        PackNameResult = Main.CmdPull("adb shell ps|grep " + TopAPPInfo.getPIDPackageName());
+        System.out.println( "> adb shell ps|grep zygote64 && adb shell ps|grep " + TopAPPInfo.getPIDPackageName() + "\n" + SystemResult + PackNameResult);
+
         try {
             // 解决获取多个64位zygote的情况的bug，导致判断程序位数不准确
                String[] testss = SystemResult.split("\n");
@@ -230,6 +239,25 @@ public class DevicesTopAPP {
         TopAPPInfo.setTargetSdk(GetAppInfo(GetAppInfo,"targetSdk=(\\d+)"));
     }
 
+    // 获取屏幕焦点应用信息
+    public static  String GetmCurrentFocus(){
+        mCurrentFocus = Main.CmdPull("adb shell dumpsys window | grep mCurrentFocus");
+        Pattern FindString = Pattern.compile("u0 (.*?)}");
+        Matcher FindStringInfo = FindString.matcher(mCurrentFocus);
+        String FindSring;
+        if ( FindStringInfo.find( )) {
+            FindSring = FindStringInfo.group(1) ;
+        }else {
+            FindSring = "null" ;
+        }
+        TopAPPInfo.setmCurrentFocus(FindSring);
+        System.out.println("\nAndroid Screen mCurrentFocus: " + FindSring);
+        System.out.println("Android Devices TopActivity: " + TopAPPInfo.getPackTopActivity());
+        return FindSring;
+    }
+
+
+
     // 获取信息主线程组
     public static void DoGetAPP() throws InterruptedException {
         GetPackNameThread t1 = new GetPackNameThread();
@@ -237,12 +265,14 @@ public class DevicesTopAPP {
         GetTopAPPBitThread t3 = new GetTopAPPBitThread();
         GetPmPathThread t4 = new GetPmPathThread();
         GetAppInfoThread t5 = new GetAppInfoThread();
+        GetmCurrentFocusThread t6 = new GetmCurrentFocusThread();
 
         Thread thread1 = new Thread(t1);
         Thread thread2 = new Thread(t2);
         Thread thread3 = new Thread(t3);
         Thread thread4 = new Thread(t4);
         Thread thread5 = new Thread(t5);
+        Thread thread6 = new Thread(t6);
 
         thread1.start();
         thread1.join();
@@ -251,11 +281,13 @@ public class DevicesTopAPP {
         thread3.start();
         thread4.start();
         thread5.start();
+        thread6.start();
 
         thread2.join();
         thread3.join();
         thread4.join();
         thread5.join();
+        thread6.join();
     }
 
 
@@ -272,6 +304,14 @@ class GetPackNameThread implements Runnable {
         TopAPPInfo.setPackName(GetTopAPP.split("/")[0]);
     }
 }
+
+// 获取 mCurrentFocus
+class GetmCurrentFocusThread implements Runnable{
+    public void run(){
+        DevicesTopAPP.GetmCurrentFocus();
+    }
+}
+
 
 // 获取手机 第一界面APP包名
 class GetTopAPPMainActivityThread implements Runnable {
