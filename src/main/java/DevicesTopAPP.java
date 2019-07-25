@@ -66,6 +66,24 @@ public class DevicesTopAPP {
         }
     }
 
+
+    // 获取屏幕顶层应用进程名称 adb shell dumpsys activity activities|grep app=ProcessRecord
+    public static void GetPIDPackageName(){
+        String adbshell = "adb shell dumpsys activity activities|grep app=ProcessRecord";
+        adbshell = Main.CmdPull(adbshell);
+        adbshell = adbshell.split("\\s+")[2].split("/")[1];
+        adbshell = adbshell.substring(0,adbshell.length()-1);
+        adbshell = adbshell.substring(0,adbshell.indexOf("a")) + "_" + adbshell.substring(adbshell.indexOf("a"),adbshell.length());
+        TopAPPInfo.setPIDPackageName(adbshell);
+    }
+
+
+    // 执行获取进程PID的信息 > adb shell ps|grep u0_a1005
+    public static String GetAPPPID(String CompatibleOS,String PackName){
+        GetAPPPID = "adb shell ps " + CompatibleOS + " |grep "+ PackName;
+        return GetAPPPID;
+    }
+
     // 获取APP的进程PID
     public static String GetTopAPPBit(String PackName){
         String PackNameResult = Main.CmdPull(GetAPPPID(CompatibleOS,PackName));
@@ -79,28 +97,34 @@ public class DevicesTopAPP {
         }
     }
 
+
+    // 获取adb shell ps|grep u0_a1005过滤信息
+    public static void GetPackNameResult(){
+        String PackNameResult = Main.CmdPull(GetAPPPID(CompatibleOS,TopAPPInfo.getPIDPackageName()));
+        TopAPPInfo.setPackNameResult(PackNameResult);
+    }
+
+
+    // 获取adb shell ps|grep zygote64过滤信息
+    public static void GetSystemResult(){
+        String SystemResult = Main.CmdPull(GetSystemPID(CompatibleOS));
+        TopAPPInfo.setSystemResult(SystemResult);
+    }
+
+
+
     // 根据获取到的 系统进程PID 与 应用程序PID 判断运行程序的位数
     public static void SetPID(String CompatibleOS,String PackName ){
 
         // 获取APP PackName PID进程ID
         GetAPPPID = GetAPPPID(CompatibleOS,PackName);
-        String PackNameResult = Main.CmdPull(GetAPPPID);
-        if( PackNameResult.length() < 3 ){
-            PackNameResult = Main.CmdPull(GetAPPPID.substring(0,GetAPPPID.length() - 1));
-        }
 
-        System.out.println( PackNameResult );
+        String PackNameResult = TopAPPInfo.getPackNameResult();
         GetAPPPID = PackNameResult.split("\\s+")[2];
-
-        TopAPPInfo.setPIDPackageName(PackNameResult.split("\\s+")[0]);
         TopAPPInfo.setPIDPackName(GetAPPPID);
 
         // 获取系统 64位zygote PID进程ID
-        SystemResult = Main.CmdPull(GetSystemPID(CompatibleOS));
-
-        // 打印命令执行结果 > adb shell ps|grep zygote64 && adb shell ps|grep <PIDPackageName>
-        PackNameResult = Main.CmdPull("adb shell ps|grep " + TopAPPInfo.getPIDPackageName());
-        System.out.println( "> adb shell ps|grep zygote64 && adb shell ps|grep " + TopAPPInfo.getPIDPackageName() + "\n" + SystemResult + PackNameResult);
+        SystemResult = TopAPPInfo.getSystemResult();
 
         try {
             // 解决获取多个64位zygote的情况的bug，导致判断程序位数不准确
@@ -135,10 +159,7 @@ public class DevicesTopAPP {
 
     }
 
-    public static String GetAPPPID(String CompatibleOS,String PackName){
-        GetAPPPID = "adb shell ps " + CompatibleOS + " |grep "+ PackName + "$";
-        return GetAPPPID;
-    }
+
 
     // 解决三星S9上获取多个64位进程pid的情况的bug
     public static String GetSystemPID(String CompatibleOS){
@@ -248,20 +269,22 @@ public class DevicesTopAPP {
     // 获取屏幕焦点应用信息
     public static  String GetmCurrentFocus(){
         mCurrentFocus = Main.CmdPull("adb shell dumpsys window | grep mCurrentFocus");
-        Pattern FindString = Pattern.compile("u0 (.*?)}");
-        Matcher FindStringInfo = FindString.matcher(mCurrentFocus);
-        String FindSring;
-        if ( FindStringInfo.find( )) {
-            FindSring = FindStringInfo.group(1) ;
-        }else {
-            FindSring = "null" ;
-        }
+        String FindSring = mCurrentFocus.split("\\s+")[3];
+        FindSring = FindSring.substring(0,FindSring.length()-1);
+        // 正则表达式部分代码
+        // Pattern FindString = Pattern.compile("u.*? (.*?)}");
+        // Matcher FindStringInfo = FindString.matcher(mCurrentFocus);
+        // String FindSring;
+        // if ( FindStringInfo.find( )) {
+        //     FindSring = FindStringInfo.group(1) ;
+        // }else {
+        //     FindSring = "null" ;
+        // }
         TopAPPInfo.setmCurrentFocus(FindSring);
         System.out.println("\nAndroid Screen mCurrentFocus: " + FindSring);
         System.out.println("Android Devices TopActivity: " + TopAPPInfo.getPackTopActivity());
         return FindSring;
     }
-
 
 
     // 获取信息主线程组
@@ -272,6 +295,9 @@ public class DevicesTopAPP {
         GetPmPathThread t4 = new GetPmPathThread();
         GetAppInfoThread t5 = new GetAppInfoThread();
         GetmCurrentFocusThread t6 = new GetmCurrentFocusThread();
+        GetPIDPackageNameThread t7 = new GetPIDPackageNameThread();
+        GetSystemResultThread t8 = new GetSystemResultThread();
+        GetPackNameResultThread t9 = new GetPackNameResultThread();
 
         Thread thread1 = new Thread(t1);
         Thread thread2 = new Thread(t2);
@@ -279,6 +305,13 @@ public class DevicesTopAPP {
         Thread thread4 = new Thread(t4);
         Thread thread5 = new Thread(t5);
         Thread thread6 = new Thread(t6);
+        Thread thread7 = new Thread(t7);
+        Thread thread8 = new Thread(t8);
+        Thread thread9 = new Thread(t9);
+
+
+        thread7.start();
+        thread7.join();
 
         thread1.start();
         thread1.join();
@@ -288,16 +321,24 @@ public class DevicesTopAPP {
         thread4.start();
         thread5.start();
         thread6.start();
+        thread8.start();
+        thread9.start();
 
         thread2.join();
         thread3.join();
         thread4.join();
         thread5.join();
         thread6.join();
+        thread8.join();
+        thread9.join();
+
+        System.out.println( "> adb shell ps|grep zygote64 && adb shell ps|grep " + TopAPPInfo.getPIDPackageName() + "\n" + TopAPPInfo.getSystemResult() + TopAPPInfo.getPackNameResult());
     }
 
 
 }
+
+
 
 
 // 获取手机 第一界面APP包名
@@ -311,13 +352,33 @@ class GetPackNameThread implements Runnable {
     }
 }
 
+// 获取手机 第一界面PS应用进程名
+class GetPIDPackageNameThread implements Runnable {
+    public void run() {
+        DevicesTopAPP.GetPIDPackageName();
+    }
+}
+
+// 获取手机 第一界面PS应用进程名
+class GetPackNameResultThread implements Runnable {
+    public void run() {
+        DevicesTopAPP.GetPackNameResult();
+    }
+}
+
+// 获取手机 第一界面PS应用进程名
+class GetSystemResultThread implements Runnable {
+    public void run() {
+        DevicesTopAPP.GetSystemResult();
+    }
+}
+
 // 获取 mCurrentFocus
 class GetmCurrentFocusThread implements Runnable{
     public void run(){
         DevicesTopAPP.GetmCurrentFocus();
     }
 }
-
 
 // 获取手机 第一界面APP包名
 class GetTopAPPMainActivityThread implements Runnable {
@@ -337,7 +398,7 @@ class GetTopAPPBitThread implements Runnable {
     private static String PackName;
     public void run() {
         // 获取顶层APP的第一启动启动界面Activity
-        PackName = TopAPPInfo.getPackName(); // 获取程序包名
+        PackName = TopAPPInfo.getPIDPackageName(); // 获取程序包名
         GetTopAPPBit = DevicesTopAPP.GetTopAPPBit(PackName);
     }
 }

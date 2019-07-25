@@ -41,8 +41,7 @@
                     <archive>
                         <manifest>
                             <!-- 主函数的入口 -->
-                            <mainClass>MainUITest</mainClass> <!--  APP-Test Tools -->
-                            <!--<mainClass>MainUI</mainClass> &lt;!&ndash;  APP-Test Tools &ndash;&gt;-->
+                            <mainClass>MainUITest</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>

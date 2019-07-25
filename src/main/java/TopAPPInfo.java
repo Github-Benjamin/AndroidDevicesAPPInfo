@@ -28,6 +28,9 @@ public class TopAPPInfo {
     public static String UninstallStatus;
     public static String PullStatus;
 
+    public static String PackNameResult;
+    public static String SystemResult;
+
     public static String getPIDzygotetwo() {
         return PIDzygotetwo;
     }
@@ -186,5 +189,21 @@ public class TopAPPInfo {
 
     public static void setPullStatus(String pullStatus) {
         PullStatus = pullStatus;
+    }
+
+    public static String getPackNameResult() {
+        return PackNameResult;
+    }
+
+    public static void setPackNameResult(String packNameResult) {
+        PackNameResult = packNameResult;
+    }
+
+    public static String getSystemResult() {
+        return SystemResult;
+    }
+
+    public static void setSystemResult(String systemResult) {
+        SystemResult = systemResult;
     }
 }
