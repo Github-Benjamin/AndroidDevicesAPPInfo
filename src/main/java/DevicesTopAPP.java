@@ -83,7 +83,13 @@ public class DevicesTopAPP {
     public static void SetPID(String CompatibleOS,String PackName ){
 
         // 获取APP PackName PID进程ID
-        String PackNameResult = Main.CmdPull(GetAPPPID(CompatibleOS,PackName));
+        GetAPPPID = GetAPPPID(CompatibleOS,PackName);
+        String PackNameResult = Main.CmdPull(GetAPPPID);
+        if( PackNameResult.length() < 3 ){
+            PackNameResult = Main.CmdPull(GetAPPPID.substring(0,GetAPPPID.length() - 1));
+        }
+
+        System.out.println( PackNameResult );
         GetAPPPID = PackNameResult.split("\\s+")[2];
 
         TopAPPInfo.setPIDPackageName(PackNameResult.split("\\s+")[0]);
@@ -130,7 +136,7 @@ public class DevicesTopAPP {
     }
 
     public static String GetAPPPID(String CompatibleOS,String PackName){
-        GetAPPPID = "adb shell ps " + CompatibleOS + " |grep "+ PackName ;
+        GetAPPPID = "adb shell ps " + CompatibleOS + " |grep "+ PackName + "$";
         return GetAPPPID;
     }
 
