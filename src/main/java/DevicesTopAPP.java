@@ -68,8 +68,8 @@ public class DevicesTopAPP {
 
 
     // 获取顶层应用程序包名 ;获取屏幕顶层应用进程名称 adb shell dumpsys activity activities|grep app=ProcessRecord
-    public static void GetPIDPackageName(){
-        String adbshell = "adb shell dumpsys activity activities|grep app=ProcessRecord";
+    public static void GetPIDPackageName(String packName){
+        String adbshell = "adb shell dumpsys activity activities|grep :" + packName;
         adbshell = Main.CmdPull(adbshell);
 
         // 获取应用程序包名
@@ -281,10 +281,12 @@ public class DevicesTopAPP {
     public static  String GetmCurrentFocus(){
         mCurrentFocus = Main.CmdPull("adb shell dumpsys window | grep mCurrentFocus");
 
-
         String FindSring = null;
         try {
             FindSring = mCurrentFocus.split("\\s+")[3];
+            if(FindSring.length() < 3){
+                FindSring = mCurrentFocus.split("\\s+")[4];
+            }
             FindSring = FindSring.substring(0,FindSring.length()-1);
         }catch (Exception e){
             FindSring = null;
@@ -329,23 +331,20 @@ public class DevicesTopAPP {
         Thread thread8 = new Thread(t8);
 
 
+        thread1.start();
+        thread1.join();
 
         thread7.start();
         thread8.start();
-        thread1.start();
         thread6.start();
         thread7.join();
         thread8.join();
         thread6.join();
-        thread1.join();
 
         thread2.start();
         thread3.start();
         thread4.start();
         thread5.start();
-
-
-
 
         thread2.join();
         thread3.join();
@@ -376,7 +375,7 @@ class GetPackNameThread implements Runnable {
 // 获取手机 第一界面PS应用进程名
 class GetPIDPackageNameThread implements Runnable {
     public void run() {
-        DevicesTopAPP.GetPIDPackageName();
+        DevicesTopAPP.GetPIDPackageName(TopAPPInfo.getPackName());
     }
 }
 
