@@ -67,14 +67,25 @@ public class DevicesTopAPP {
     }
 
 
-    // 获取屏幕顶层应用进程名称 adb shell dumpsys activity activities|grep app=ProcessRecord
+    // 获取顶层应用程序包名 ;获取屏幕顶层应用进程名称 adb shell dumpsys activity activities|grep app=ProcessRecord
     public static void GetPIDPackageName(){
         String adbshell = "adb shell dumpsys activity activities|grep app=ProcessRecord";
         adbshell = Main.CmdPull(adbshell);
-        adbshell = adbshell.split("\\s+")[2].split("/")[1];
-        adbshell = adbshell.substring(0,adbshell.length()-1);
-        adbshell = adbshell.substring(0,adbshell.indexOf("a")) + "_" + adbshell.substring(adbshell.indexOf("a"),adbshell.length());
-        TopAPPInfo.setPIDPackageName(adbshell);
+
+        // 获取应用程序包名
+        String result = adbshell;
+        String PackName = result.split(":")[1].split("/")[0];
+
+        // 获取应用程序PID进程名
+        adbshell = adbshell.split("\\s+")[2];
+        String pidpackagename = adbshell.split("/")[1];
+        pidpackagename = pidpackagename.substring(0,pidpackagename.length()-1);
+        pidpackagename = pidpackagename.substring(0,pidpackagename.indexOf("a")) + "_" + pidpackagename.substring(pidpackagename.indexOf("a"),pidpackagename.length());
+        TopAPPInfo.setPIDPackageName(pidpackagename);
+
+        // 获取到应用程序PID进程名就立即使用执行获取 adb shell ps|grep <pid packagename>
+        GetPackNameResult();
+
     }
 
 
@@ -269,8 +280,17 @@ public class DevicesTopAPP {
     // 获取屏幕焦点应用信息
     public static  String GetmCurrentFocus(){
         mCurrentFocus = Main.CmdPull("adb shell dumpsys window | grep mCurrentFocus");
-        String FindSring = mCurrentFocus.split("\\s+")[3];
-        FindSring = FindSring.substring(0,FindSring.length()-1);
+
+
+        String FindSring = null;
+        try {
+            FindSring = mCurrentFocus.split("\\s+")[3];
+            FindSring = FindSring.substring(0,FindSring.length()-1);
+        }catch (Exception e){
+            FindSring = null;
+        }
+
+
         // 正则表达式部分代码
         // Pattern FindString = Pattern.compile("u.*? (.*?)}");
         // Matcher FindStringInfo = FindString.matcher(mCurrentFocus);
@@ -297,7 +317,7 @@ public class DevicesTopAPP {
         GetmCurrentFocusThread t6 = new GetmCurrentFocusThread();
         GetPIDPackageNameThread t7 = new GetPIDPackageNameThread();
         GetSystemResultThread t8 = new GetSystemResultThread();
-        GetPackNameResultThread t9 = new GetPackNameResultThread();
+
 
         Thread thread1 = new Thread(t1);
         Thread thread2 = new Thread(t2);
@@ -307,38 +327,39 @@ public class DevicesTopAPP {
         Thread thread6 = new Thread(t6);
         Thread thread7 = new Thread(t7);
         Thread thread8 = new Thread(t8);
-        Thread thread9 = new Thread(t9);
+
 
 
         thread7.start();
-        thread7.join();
-
+        thread8.start();
         thread1.start();
+        thread6.start();
+        thread7.join();
+        thread8.join();
+        thread6.join();
         thread1.join();
 
         thread2.start();
         thread3.start();
         thread4.start();
         thread5.start();
-        thread6.start();
-        thread8.start();
-        thread9.start();
+
+
+
 
         thread2.join();
         thread3.join();
         thread4.join();
         thread5.join();
-        thread6.join();
-        thread8.join();
-        thread9.join();
+
+
+
 
         System.out.println( "> adb shell ps|grep zygote64 && adb shell ps|grep " + TopAPPInfo.getPIDPackageName() + "\n" + TopAPPInfo.getSystemResult() + TopAPPInfo.getPackNameResult());
     }
 
 
 }
-
-
 
 
 // 获取手机 第一界面APP包名

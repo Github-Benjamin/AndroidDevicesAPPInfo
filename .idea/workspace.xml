@@ -16,7 +16,7 @@
       <file leaf-file-name="MainUITest.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/MainUITest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1089">
+            <state relative-caret-position="3128">
               <caret line="191" selection-start-line="191" selection-end-line="191" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
@@ -29,17 +29,13 @@
       <file leaf-file-name="DevicesTopAPP.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/DevicesTopAPP.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="401" selection-start-line="401" selection-end-line="401" />
+            <state relative-caret-position="123">
+              <caret line="289" column="29" selection-start-line="289" selection-start-column="29" selection-end-line="289" selection-end-column="29" />
               <folding>
-                <element signature="e#12055#12056#0" expanded="true" />
-                <element signature="e#12103#12104#0" expanded="true" />
-                <element signature="e#12410#12411#0" expanded="true" />
-                <element signature="e#12459#12460#0" expanded="true" />
-                <element signature="e#12558#12559#0" expanded="true" />
-                <element signature="e#12607#12608#0" expanded="true" />
-                <element signature="e#11586#11587#0" expanded="true" />
-                <element signature="e#11634#11635#0" expanded="true" />
+                <element signature="e#12894#12895#0" expanded="true" />
+                <element signature="e#12943#12944#0" expanded="true" />
+                <element signature="e#13331#13332#0" expanded="true" />
+                <element signature="e#13379#13380#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -48,7 +44,7 @@
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="198">
+            <state relative-caret-position="2244">
               <caret line="135" selection-start-line="135" selection-end-line="135" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
@@ -61,16 +57,10 @@
       <file leaf-file-name="TopAPPInfo.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/TopAPPInfo.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="499">
+            <state relative-caret-position="1921">
               <caret line="193" column="46" selection-start-line="193" selection-start-column="46" selection-end-line="193" selection-end-column="46" />
               <folding>
-                <element signature="e#4751#4752#0" expanded="true" />
-                <element signature="e#4818#4819#0" expanded="true" />
-                <element signature="e#4865#4866#0" expanded="true" />
-                <element signature="e#4911#4912#0" expanded="true" />
-                <element signature="e#4946#4947#0" expanded="true" />
-                <element signature="e#5009#5010#0" expanded="true" />
-                <element signature="e#5052#5053#0" expanded="true" />
+                <element signature="e#4747#4748#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -87,8 +77,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>GetSDKVersionThread</find>
-      <find>linel5</find>
       <find>getSDKVersion</find>
       <find>JPanel</find>
       <find>SDKVersion</find>
@@ -103,7 +91,6 @@
       <find>SetTopAPPMainActivity(</find>
       <find>TopAPPInfo.setPackName(</find>
       <find>GetmCurrentFocus</find>
-      <find>GetAPPPID(</find>
       <find>getPIDPackName</find>
       <find>GetTopAPPBit(</find>
       <find>GetSystemPID</find>
@@ -114,10 +101,16 @@
       <find>TopAPPInfo.setPIDPackageName(</find>
       <find>GetPackNameThread</find>
       <find>GetPIDPackageNameThread</find>
-      <find>GetPackNameResult</find>
       <find>GetPIDPackageName</find>
       <find>SetPID(</find>
+      <find>GetPackNameResult()</find>
+      <find>GetAPPPID(</find>
+      <find>GetPackNameResult</find>
+      <find>catch</find>
     </findStrings>
+    <replaceStrings>
+      <replace />
+    </replaceStrings>
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -187,7 +180,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
+      <pane id="AndroidView" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -222,8 +215,8 @@
           <select />
         </subPane>
       </pane>
-      <pane id="AndroidView" />
       <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -363,11 +356,12 @@
       <workItem from="1551963918482" duration="711000" />
       <workItem from="1557930584714" duration="36000" />
       <workItem from="1564064253027" duration="7274000" />
+      <workItem from="1564102852916" duration="1904000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="61083000" />
+    <option name="totallyTimeSpent" value="62987000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -386,8 +380,9 @@
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.32965517" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.20469083" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.20682302" />
       <window_info anchor="right" id="Database" order="3" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.34896553" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="2" />
@@ -399,7 +394,6 @@
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.34896553" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -414,6 +408,51 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/main/java/MainUITest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3128">
+          <caret line="191" selection-start-line="191" selection-end-line="191" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2244">
+          <caret line="135" selection-start-line="135" selection-end-line="135" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/TopAPPInfo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1921">
+          <caret line="193" column="46" selection-start-line="193" selection-start-column="46" selection-end-line="193" selection-end-column="46" />
+          <folding>
+            <element signature="e#4747#4748#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/DevicesTopAPP.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="6817">
+          <caret line="401" selection-start-line="401" selection-end-line="401" />
+          <folding>
+            <element signature="e#12894#12895#0" expanded="true" />
+            <element signature="e#12943#12944#0" expanded="true" />
+            <element signature="e#13331#13332#0" expanded="true" />
+            <element signature="e#13379#13380#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/MainUITest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2193">
@@ -437,14 +476,10 @@
         <state relative-caret-position="4811">
           <caret line="284" selection-start-line="284" selection-end-line="284" />
           <folding>
-            <element signature="e#12055#12056#0" expanded="true" />
-            <element signature="e#12103#12104#0" expanded="true" />
-            <element signature="e#12410#12411#0" expanded="true" />
-            <element signature="e#12459#12460#0" expanded="true" />
-            <element signature="e#12558#12559#0" expanded="true" />
-            <element signature="e#12607#12608#0" expanded="true" />
-            <element signature="e#11586#11587#0" expanded="true" />
-            <element signature="e#11634#11635#0" expanded="true" />
+            <element signature="e#12894#12895#0" expanded="true" />
+            <element signature="e#12943#12944#0" expanded="true" />
+            <element signature="e#13331#13332#0" expanded="true" />
+            <element signature="e#13379#13380#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -740,7 +775,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/MainUITest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1089">
+        <state relative-caret-position="3128">
           <caret line="191" selection-start-line="191" selection-end-line="191" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
@@ -772,23 +807,17 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/TopAPPInfo.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="499">
+        <state relative-caret-position="1921">
           <caret line="193" column="46" selection-start-line="193" selection-start-column="46" selection-end-line="193" selection-end-column="46" />
           <folding>
-            <element signature="e#4751#4752#0" expanded="true" />
-            <element signature="e#4818#4819#0" expanded="true" />
-            <element signature="e#4865#4866#0" expanded="true" />
-            <element signature="e#4911#4912#0" expanded="true" />
-            <element signature="e#4946#4947#0" expanded="true" />
-            <element signature="e#5009#5010#0" expanded="true" />
-            <element signature="e#5052#5053#0" expanded="true" />
+            <element signature="e#4747#4748#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
+        <state relative-caret-position="2244">
           <caret line="135" selection-start-line="135" selection-end-line="135" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
@@ -799,17 +828,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/DevicesTopAPP.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="401" selection-start-line="401" selection-end-line="401" />
+        <state relative-caret-position="123">
+          <caret line="289" column="29" selection-start-line="289" selection-start-column="29" selection-end-line="289" selection-end-column="29" />
           <folding>
-            <element signature="e#12055#12056#0" expanded="true" />
-            <element signature="e#12103#12104#0" expanded="true" />
-            <element signature="e#12410#12411#0" expanded="true" />
-            <element signature="e#12459#12460#0" expanded="true" />
-            <element signature="e#12558#12559#0" expanded="true" />
-            <element signature="e#12607#12608#0" expanded="true" />
-            <element signature="e#11586#11587#0" expanded="true" />
-            <element signature="e#11634#11635#0" expanded="true" />
+            <element signature="e#12894#12895#0" expanded="true" />
+            <element signature="e#12943#12944#0" expanded="true" />
+            <element signature="e#13331#13332#0" expanded="true" />
+            <element signature="e#13379#13380#0" expanded="true" />
           </folding>
         </state>
       </provider>
