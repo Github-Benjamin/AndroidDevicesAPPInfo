@@ -11,8 +11,8 @@ import java.awt.event.ActionListener;
 public class MainUITest extends JFrame implements ActionListener  {
 
     // 定义组件
-    JButton EnterBtn,GetFile,StartBtn,CloseBtn,CleanAndStartBtn,ScreenshotBtn; // 定义确认按钮
-    JMenuItem MenuUninstall,MenuScreenshot,MenuGetLog,MenuAbout;
+    JButton EnterBtn,GetFile,CloseBtn,CleanAndStartBtn; // 定义确认按钮
+    JMenuItem MenuUninstall,MenuScreenshot,MenuAbout;
     JLabel PackBit,versionCode, versionName, minSdk, targetSdk;
     JTextField PackName,PackPath,Launchable_Activity,TopActivity;
     public static void main(String[] args) {
@@ -24,29 +24,22 @@ public class MainUITest extends JFrame implements ActionListener  {
         // 创建组件并设置监听
         EnterBtn = new JButton("获取APK信息");
         GetFile = new JButton("备份APK");
-//        StartBtn = new JButton("启动");
         CloseBtn = new JButton("关闭当前程序");
         CleanAndStartBtn = new JButton("清除数据并启动");
-//        ScreenshotBtn = new JButton("截图");
 
         EnterBtn.addActionListener(this);
         GetFile.addActionListener(this);
-//        StartBtn.addActionListener(this);
         CloseBtn.addActionListener(this);
         CleanAndStartBtn.addActionListener(this);
-//        ScreenshotBtn.addActionListener(this);
 
         //初始化一个菜单栏
         JMenuBar menuAbout = new JMenuBar();
         MenuAbout = new JMenuItem("About");
         JMenuBar menuScreenshot = new JMenuBar();
         MenuScreenshot = new JMenuItem("截图");
-//        JMenuBar menuGetLog = new JMenuBar();
-//        MenuGetLog = new JMenuItem("GetLog");
         JMenuBar menuUninstall = new JMenuBar();
         MenuUninstall = new JMenuItem("卸载");
         menuAbout.add(MenuScreenshot);
-//        menuAbout.add(MenuGetLog);
         menuAbout.add(MenuUninstall);
         menuAbout.add(MenuAbout);
         myEvent();  // 加载菜单栏监听事件处理
@@ -96,7 +89,6 @@ public class MainUITest extends JFrame implements ActionListener  {
         getContentPane().add(CleanAndStartBtn);
 
         this.setJMenuBar(menuScreenshot);	//设置菜单栏 截图
-//        this.setJMenuBar(menuGetLog);
         this.setJMenuBar(menuUninstall);
         this.setJMenuBar(menuAbout);	//设置菜单栏 关于
 
@@ -114,7 +106,6 @@ public class MainUITest extends JFrame implements ActionListener  {
     // 菜单栏监听
     private void myEvent()
     {
-
         // 截图
         MenuScreenshot.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -129,33 +120,11 @@ public class MainUITest extends JFrame implements ActionListener  {
             }
         });
 
-//        // 获取日志
-//        MenuGetLog.addActionListener(new ActionListener() {
-//            public void actionPerformed(ActionEvent e) {
-//                try {
-//                    GetLogUtil.GetLog();
-//                } catch (InterruptedException e1) {
-//                    e1.printStackTrace();
-//                }
-//            }
-//        });
-
-
         // 卸载
         MenuUninstall.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-
                 // 获取设备信息；fix uninstall APP bug
-                try {
-                    Main.GetDevicesStatus();
-                } catch (InterruptedException e1) {
-                    e1.printStackTrace();
-                }
-
-                if( DevicesInfo.getAdbDevices().equals("Success") == false ) {
-                    JOptionPane.showMessageDialog(null,DevicesInfo.getAdbDevices(),"提示消息",JOptionPane.WARNING_MESSAGE);
-                    return;
-                }
+                if( GetDevicesStatus().equals("0")){ return; }
 
                 if(TopAPPInfo.getPackPath() == null | TopAPPInfo.getPackPath() == ""){
                     JOptionPane.showMessageDialog(null,"请先获取APK信息！","提示消息",JOptionPane.WARNING_MESSAGE);
@@ -174,15 +143,13 @@ public class MainUITest extends JFrame implements ActionListener  {
             }
         });
 
-
         // About
         MenuAbout.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            JOptionPane.showMessageDialog(null, "Author: Benjamin\nWeChat: WeChat_Benjamin\nEmail: Benjamin_v@qq.com", "AboutInfo",JOptionPane.INFORMATION_MESSAGE);
-            return;
+                JOptionPane.showMessageDialog(null, "Author: Benjamin\nWeChat: WeChat_Benjamin\nEmail: Benjamin_v@qq.com", "AboutInfo",JOptionPane.INFORMATION_MESSAGE);
+                return;
             }
         });
-
 
     }
 
@@ -191,19 +158,9 @@ public class MainUITest extends JFrame implements ActionListener  {
     public void actionPerformed(ActionEvent e) {
 
         // 获取设备信息
-        try {
-            Main.GetDevicesStatus();
-        } catch (InterruptedException e1) {
-            e1.printStackTrace();
-        }
-
-        if( DevicesInfo.getAdbDevices().equals("Success") == false ) {
-            JOptionPane.showMessageDialog(null,DevicesInfo.getAdbDevices(),"提示消息",JOptionPane.WARNING_MESSAGE);
-            return;
-        }
+        if( GetDevicesStatus().equals("0")){ return; }
 
         if(e.getActionCommand()=="获取APK信息") {
-
             try {
                 DevicesTopAPP.DoGetAPP();
             } catch (InterruptedException e1) {
@@ -219,55 +176,55 @@ public class MainUITest extends JFrame implements ActionListener  {
             versionName.setText(TopAPPInfo.getVersionName());
             minSdk.setText(TopAPPInfo.getMinSdk());
             targetSdk.setText(TopAPPInfo.getTargetSdk());
-
             return;
-
-        }else if(e.getActionCommand()=="备份APK"){
-
-            if(TopAPPInfo.getPackPath() == null | TopAPPInfo.getPackPath() == ""){
-                JOptionPane.showMessageDialog(null,"请先获取APK信息！","提示消息",JOptionPane.WARNING_MESSAGE);
-            }else {
-                //执行pull备份到本地
-                DevicesTopAPP.GetPullFile(TopAPPInfo.getPackPath(),TopAPPInfo.getPackName());
-
-                if( TopAPPInfo.getPullStatus().equals("Success") == false ){
-                    JOptionPane.showMessageDialog(null,TopAPPInfo.getPullStatus(),"Error!",JOptionPane.WARNING_MESSAGE);
-                    return;
-                }
-
-                JOptionPane.showMessageDialog(null,"备份成功，请查看本地目录！","提示消息",JOptionPane.WARNING_MESSAGE);
-                return;
-            }
-
-        }else if(e.getActionCommand()=="清除数据并启动"){
-
-            if(TopAPPInfo.getPackPath() == null | TopAPPInfo.getPackPath() == ""){
-                JOptionPane.showMessageDialog(null,"请先获取APK信息！","提示消息",JOptionPane.WARNING_MESSAGE);
-            }else {
-                //执行cmd命令, 清除、启动
-                DevicesTopAPP.CleanAPP(TopAPPInfo.getPackName());
-                if( TopAPPInfo.getClearStatus().equals("Success") == false ) {
-                    JOptionPane.showMessageDialog(null,TopAPPInfo.getClearStatus(),"Error!",JOptionPane.WARNING_MESSAGE);
-                    return;
-                }
-                DevicesTopAPP.StartAPPLaunchableActivity(TopAPPInfo.getPackMainActivity());
-                return;
-            }
-
-        }else if(e.getActionCommand()=="关闭当前程序"){
-
-            if(TopAPPInfo.getPackPath() == null | TopAPPInfo.getPackPath() == ""){
-                JOptionPane.showMessageDialog(null,"请先获取APK信息！","提示消息",JOptionPane.WARNING_MESSAGE);
-            }else {
-                //执行cmd命令,关闭当前程序
-                DevicesTopAPP.CloseAPP(TopAPPInfo.getPackName());
-                return;
-            }
 
         }
 
+        // 判断获取到app信息
+        if(TopAPPInfo.getPackPath() == null | TopAPPInfo.getPackPath() == ""){
+            JOptionPane.showMessageDialog(null,"请先获取APK信息！","提示消息",JOptionPane.WARNING_MESSAGE);
+            return;
+        }
 
+        if(e.getActionCommand()=="备份APK"){
+            //执行pull备份到本地
+            DevicesTopAPP.GetPullFile(TopAPPInfo.getPackPath(),TopAPPInfo.getPackName());
+            if( TopAPPInfo.getPullStatus().equals("Success") == false ){
+                JOptionPane.showMessageDialog(null,TopAPPInfo.getPullStatus(),"Error!",JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            JOptionPane.showMessageDialog(null,"备份成功，请查看本地目录！","提示消息",JOptionPane.WARNING_MESSAGE);
+            return;
+        }else if(e.getActionCommand()=="清除数据并启动"){
+            //执行cmd命令, 清除、启动
+            DevicesTopAPP.CleanAPP(TopAPPInfo.getPackName());
+            if( TopAPPInfo.getClearStatus().equals("Success") == false ) {
+                JOptionPane.showMessageDialog(null,TopAPPInfo.getClearStatus(),"Error!",JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            DevicesTopAPP.StartAPPLaunchableActivity(TopAPPInfo.getPackMainActivity());
+            return;
+        }else if(e.getActionCommand()=="关闭当前程序"){
+            //执行cmd命令,关闭当前程序
+            DevicesTopAPP.CloseAPP(TopAPPInfo.getPackName());
+            return;
+        }
 
+    }
+
+    // 获取设备状态信息
+    public static String GetDevicesStatus() {
+        // 获取设备信息
+        try {
+            DevicesTopAPP.GetDevicesStatus();
+        } catch (InterruptedException e1) {
+            e1.printStackTrace();
+        }
+        if( TopAPPInfo.getAdbDevices().equals("Success") == false ) {
+            JOptionPane.showMessageDialog(null,TopAPPInfo.getAdbDevices(),"提示消息",JOptionPane.WARNING_MESSAGE);
+            return "0";
+        }
+        return "1";
     }
 
 }

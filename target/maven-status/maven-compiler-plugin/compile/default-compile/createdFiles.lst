@@ -1,7 +1,7 @@
-GetmCurrentFocusThread.class
-GetTopAPPBitThread.class
-StreamCaptureThread.class
 DevicesTopAPP.class
 GetTopAPPMainActivityThread.class
 GetPackNameThread.class
 GetPmPathThread.class
+GetmCurrentFocusThread.class
+GetTopAPPBitThread.class
+StreamCaptureThread.class

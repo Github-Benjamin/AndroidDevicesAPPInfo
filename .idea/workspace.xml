@@ -27,21 +27,70 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="DevicesTopAPP.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="DevicesTopAPP.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/DevicesTopAPP.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-3326">
-              <caret line="76" selection-start-line="76" selection-end-line="76" />
+            <state relative-caret-position="61">
+              <caret line="136" lean-forward="true" selection-start-line="136" selection-end-line="136" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#13220#13221#0" expanded="true" />
-                <element signature="e#13269#13270#0" expanded="true" />
-                <element signature="e#13368#13369#0" expanded="true" />
-                <element signature="e#13417#13418#0" expanded="true" />
-                <element signature="e#13514#13515#0" expanded="true" />
-                <element signature="e#13561#13562#0" expanded="true" />
-                <element signature="e#13657#13658#0" expanded="true" />
-                <element signature="e#13705#13706#0" expanded="true" />
+                <element signature="e#13292#13293#0" expanded="true" />
+                <element signature="e#13365#13366#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="-442">
+                <caret line="22" lean-forward="true" selection-start-line="22" selection-end-line="22" />
+              </first_editor>
+              <second_editor />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TopAPPInfo.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/TopAPPInfo.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="901">
+              <caret line="73" column="41" selection-start-line="73" selection-start-column="25" selection-end-line="73" selection-end-column="41" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="StreamCaptureThread.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/StreamCaptureThread.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="65">
+              <caret line="9" column="32" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="32" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ScreenshotUtil.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/ScreenshotUtil.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="238">
+              <caret line="14" column="35" selection-start-line="14" selection-start-column="25" selection-end-line="14" selection-end-column="35" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MainUITest.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/MainUITest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1686">
+              <caret line="213" lean-forward="true" selection-start-line="213" selection-end-line="213" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -58,24 +107,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>GetAPPPID</find>
-      <find>menuScreenshot</find>
-      <find>command</find>
-      <find>MenuGetLog</find>
-      <find>MenuScreenshot</find>
-      <find>进程</find>
-      <find>zy</find>
-      <find>zygote64</find>
-      <find>GetSystemPID</find>
-      <find>GetSystemPID(</find>
-      <find>-A</find>
-      <find>GetTopAPPBit(</find>
-      <find>System</find>
-      <find>cmd</find>
-      <find>StreamCaptureThread</find>
-      <find>获取APK信息</find>
-      <find>DevicesTopAP</find>
-      <find>GetTopAPP</find>
       <find>System.out</find>
       <find>System.ou</find>
       <find>System.out.println</find>
@@ -88,9 +119,28 @@
       <find>GetAPPPID(</find>
       <find>GetPIDPackageName(</find>
       <find>GetPIDPackageNameThread</find>
+      <find>CmdPull</find>
+      <find>Main.CmdPull</find>
+      <find>MainUI</find>
+      <find>DevicesInfo</find>
+      <find>TopAPPInfo.getAdbDevices()</find>
+      <find>DevicesTopAPP.GetDevicesStatus();</find>
+      <find>GetDevicesStatus</find>
+      <find>GetAdbDevicesThread</find>
+      <find>GetPackNameResultThread</find>
+      <find>GetPackNameResult</find>
+      <find>Exce</find>
+      <find>GetTopAPPMainActivity(</find>
+      <find>GetSystemResult</find>
+      <find>GetSystemResultThread</find>
+      <find>GetPIDPackageName</find>
+      <find>GetmCurrentFocus</find>
+      <find>GetTopAPPBitThread</find>
+      <find>GetAppInfo</find>
     </findStrings>
     <replaceStrings>
       <replace />
+      <replace>CmdPull</replace>
     </replaceStrings>
   </component>
   <component name="IdeDocumentHistory">
@@ -100,11 +150,11 @@
         <option value="$PROJECT_DIR$/src/main/java/AndroidAPP/MainUITest.java" />
         <option value="$PROJECT_DIR$/src/main/java/AndroidAPP/GetLogUtil.java" />
         <option value="$PROJECT_DIR$/src/main/java/GetLogUtil.java" />
-        <option value="$PROJECT_DIR$/src/main/java/MainUITest.java" />
-        <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/java/Main.java" />
-        <option value="$PROJECT_DIR$/src/main/java/ScreenshotUtil.java" />
         <option value="$PROJECT_DIR$/src/main/java/TopAPPInfo.java" />
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/MainUITest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/ScreenshotUtil.java" />
         <option value="$PROJECT_DIR$/src/main/java/DevicesTopAPP.java" />
       </list>
     </option>
@@ -147,9 +197,8 @@
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths />
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-199" />
-    <option name="y" value="194" />
+  <component name="ProjectFrameBounds" extendedState="7">
+    <option name="y" value="17" />
     <option name="width" value="1670" />
     <option name="height" value="1040" />
   </component>
@@ -158,7 +207,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
+      <pane id="AndroidView" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -184,17 +233,12 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="MobileDevicesTools" type="b2602c69:ProjectViewProjectNode" />
-              <item name="MobileDevicesTools" type="462c0819:PsiDirectoryNode" />
-              <item name="target" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
       <pane id="PackagesPane" />
-      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -362,14 +406,17 @@
       <workItem from="1564020351593" duration="100000" />
       <workItem from="1564057375041" duration="2345000" />
       <workItem from="1564136636666" duration="2878000" />
+      <workItem from="1564659614928" duration="791000" />
+      <workItem from="1565083152755" duration="611000" />
+      <workItem from="1565942203757" duration="9574000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="115455000" />
+    <option name="totallyTimeSpent" value="126431000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-4" y="-4" width="1928" height="1168" extended-state="6" />
+    <frame x="-4" y="-4" width="1928" height="1168" extended-state="7" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -378,15 +425,16 @@
       <window_info id="Image Layers" order="2" />
       <window_info anchor="right" id="Capture Analysis" order="3" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
-      <window_info anchor="right" id="Maven Projects" order="3" visible="true" weight="0.1641791" />
+      <window_info anchor="right" id="Maven Projects" order="3" weight="0.19349681" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.3169557" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.26396918" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.3298969" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49876848" visible="true" weight="0.1716418" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49876848" visible="true" weight="0.18923241" />
       <window_info anchor="right" id="Database" order="3" weight="0.32995737" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32851636" />
       <window_info id="Structure" order="1" sideWeight="0.50123155" side_tool="true" weight="0.12633263" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="2" />
@@ -398,34 +446,33 @@
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32947975" />
     </layout>
     <layout-to-restore>
       <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="bottom" id="Version Control" order="10" show_stripe_button="false" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Capture Analysis" order="4" />
       <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.20038536" />
       <window_info anchor="right" id="Theme Preview" order="5" />
-      <window_info anchor="bottom" id="Message" order="0" />
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49876848" visible="true" weight="0.1076759" />
       <window_info id="Structure" order="1" sideWeight="0.50123155" side_tool="true" weight="0.12633263" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Version Control" order="10" show_stripe_button="false" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
       <window_info id="UI Designer" order="4" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="right" id="Database" order="6" />
       <window_info anchor="right" id="Palette&#9;" order="7" />
       <window_info anchor="bottom" id="Terminal" order="8" weight="0.3298969" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39884394" />
-      <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info id="Capture Tool" order="5" />
-      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Messages" order="11" weight="0.24662814" />
       <window_info anchor="right" id="Maven Projects" order="8" weight="0.17004265" />
       <window_info id="Favorites" order="6" side_tool="true" />
@@ -447,52 +494,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/DevicesTopAPP.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4369">
-          <caret line="257" column="15" selection-start-line="257" selection-start-column="15" selection-end-line="257" selection-end-column="15" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#13220#13221#0" expanded="true" />
-            <element signature="e#13269#13270#0" expanded="true" />
-            <element signature="e#13368#13369#0" expanded="true" />
-            <element signature="e#13417#13418#0" expanded="true" />
-            <element signature="e#13514#13515#0" expanded="true" />
-            <element signature="e#13561#13562#0" expanded="true" />
-            <element signature="e#13657#13658#0" expanded="true" />
-            <element signature="e#13705#13706#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/DevicesTopAPP.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1547">
-          <caret line="91" selection-start-line="91" selection-end-line="91" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/TopAPPInfo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" selection-start-line="16" selection-end-line="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="663">
-          <caret line="39" column="45" selection-start-line="39" selection-start-column="45" selection-end-line="39" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/MainUITest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="867">
-          <caret line="58" column="8" lean-forward="true" selection-start-line="58" selection-start-column="8" selection-end-line="58" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/MainUI.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1054">
@@ -747,84 +748,97 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/GetLogUtil.java" />
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="748">
-          <caret line="44" column="105" selection-start-line="44" selection-start-column="105" selection-end-line="44" selection-end-column="105" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/StreamCaptureThread.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="9" column="32" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="32" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/ScreenshotUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="14" selection-start-line="14" selection-end-line="14" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/MainUI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1275">
-          <caret line="82" column="16" selection-start-line="82" selection-start-column="16" selection-end-line="82" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/MainUITest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3400">
-          <caret line="207" column="34" selection-start-line="207" selection-start-column="30" selection-end-line="207" selection-end-column="38" />
+        <state relative-caret-position="-15">
+          <caret line="71" lean-forward="true" selection-start-line="71" selection-end-line="71" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="43" column="86" selection-start-line="43" selection-start-column="86" selection-end-line="43" selection-end-column="86" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2244">
-          <caret line="135" selection-start-line="135" selection-end-line="135" />
+        <state relative-caret-position="189">
+          <caret line="130" selection-start-line="130" selection-end-line="148" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/screenshot20190626175148.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AndroidDevicesInfo.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AndroidAPP.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/screenshot20190816164110.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/StreamCaptureThread.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="65">
+          <caret line="9" column="32" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ScreenshotUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" column="35" selection-start-line="14" selection-start-column="25" selection-end-line="14" selection-end-column="35" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/MainUITest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1686">
+          <caret line="213" lean-forward="true" selection-start-line="213" selection-end-line="213" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/DevicesTopAPP.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="61">
+          <caret line="136" lean-forward="true" selection-start-line="136" selection-end-line="136" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#13292#13293#0" expanded="true" />
+            <element signature="e#13365#13366#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/TopAPPInfo.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1649">
-          <caret line="97" column="46" selection-start-line="97" selection-start-column="46" selection-end-line="97" selection-end-column="46" />
+        <state relative-caret-position="901">
+          <caret line="73" column="41" selection-start-line="73" selection-start-column="25" selection-end-line="73" selection-end-column="41" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/DevicesTopAPP.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3326">
-          <caret line="76" selection-start-line="76" selection-end-line="76" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#13220#13221#0" expanded="true" />
-            <element signature="e#13269#13270#0" expanded="true" />
-            <element signature="e#13368#13369#0" expanded="true" />
-            <element signature="e#13417#13418#0" expanded="true" />
-            <element signature="e#13514#13515#0" expanded="true" />
-            <element signature="e#13561#13562#0" expanded="true" />
-            <element signature="e#13657#13658#0" expanded="true" />
-            <element signature="e#13705#13706#0" expanded="true" />
-          </folding>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="-442">
+            <caret line="22" lean-forward="true" selection-start-line="22" selection-end-line="22" />
+          </first_editor>
+          <second_editor />
         </state>
       </provider>
     </entry>

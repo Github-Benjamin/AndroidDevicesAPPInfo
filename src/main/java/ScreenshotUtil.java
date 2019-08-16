@@ -1,4 +1,3 @@
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -12,14 +11,6 @@ public class ScreenshotUtil {
     public static String Screencap = "adb shell screencap -p /sdcard/screenshot.png";
     public static String PullImage = "adb pull /sdcard/screenshot.png /Users/xielianshi/Desktop";
 
-
-//    // 获取当前Unix时间戳
-//    public static String GetNowTimeStamp(){
-//        long time = System.currentTimeMillis();
-//        String nowTimeStamp = String.valueOf(time / 1000);
-//        return nowTimeStamp;
-//    }
-
     // 获取当前时间
     public static String GetNowTime(){
         //设置日期格式
@@ -31,7 +22,7 @@ public class ScreenshotUtil {
     public static String Screencap(){
         TopAPPInfo.setScreencapTime(ScreenshotUtil.GetNowTime());
         Screencap = "adb shell screencap -p /sdcard/screenshot" + TopAPPInfo.getScreencapTime() + ".png";
-        Screencap = Main.CmdPull(Screencap);
+        Screencap = DevicesTopAPP.CmdPull(Screencap);
         // 判断截图是否成功
         if (Screencap.indexOf("error")!=-1){
             // -1 不包含，其他为包含
@@ -48,17 +39,16 @@ public class ScreenshotUtil {
     // 执行pull同步图片命令
     public static String PullImage(){
         PullImage = "adb pull /sdcard/screenshot" + TopAPPInfo.getScreencapTime() + ".png";
-        PullImage = Main.CmdPull(PullImage);
+        PullImage = DevicesTopAPP.CmdPull(PullImage);
         return PullImage;
     }
 
     // 执行删除命令
     public static String RmImage(){
         RmImage = "adb shell rm -rf /sdcard/screenshot" + TopAPPInfo.getScreencapTime() + ".png";
-        RmImage = Main.CmdPull(RmImage);
+        RmImage = DevicesTopAPP.CmdPull(RmImage);
         return RmImage;
     }
-
 
     // 操作方法组合
     public static String ScreencapShot(){

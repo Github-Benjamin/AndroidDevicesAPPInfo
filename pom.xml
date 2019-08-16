@@ -42,7 +42,6 @@
                         <manifest>
                             <!-- 主函数的入口 -->
                             <mainClass>MainUITest</mainClass> <!--  APP-Test Tools -->
-                            <!--<mainClass>MainUI</mainClass> &lt;!&ndash;  APP-Test Tools &ndash;&gt;-->
                         </manifest>
                     </archive>
                     <descriptorRefs>
