@@ -21,7 +21,7 @@ public class ScreenshotUtil {
     // 执行截图命令
     public static String Screencap(){
         TopAPPInfo.setScreencapTime(ScreenshotUtil.GetNowTime());
-        Screencap = "adb shell screencap -p /sdcard/screenshot" + TopAPPInfo.getScreencapTime() + ".png";
+        Screencap = "adb "+ deviceInfo.getSelectDevice() +" shell screencap -p /sdcard/screenshot" + TopAPPInfo.getScreencapTime() + ".png";
         Screencap = DevicesTopAPP.CmdPull(Screencap);
         // 判断截图是否成功
         if (Screencap.indexOf("error")!=-1){
@@ -38,14 +38,14 @@ public class ScreenshotUtil {
 
     // 执行pull同步图片命令
     public static String PullImage(){
-        PullImage = "adb pull /sdcard/screenshot" + TopAPPInfo.getScreencapTime() + ".png";
+        PullImage = "adb "+ deviceInfo.getSelectDevice() +" pull /sdcard/screenshot" + TopAPPInfo.getScreencapTime() + ".png";
         PullImage = DevicesTopAPP.CmdPull(PullImage);
         return PullImage;
     }
 
     // 执行删除命令
     public static String RmImage(){
-        RmImage = "adb shell rm -rf /sdcard/screenshot" + TopAPPInfo.getScreencapTime() + ".png";
+        RmImage = "adb "+ deviceInfo.getSelectDevice() +" shell rm -rf /sdcard/screenshot" + TopAPPInfo.getScreencapTime() + ".png";
         RmImage = DevicesTopAPP.CmdPull(RmImage);
         return RmImage;
     }

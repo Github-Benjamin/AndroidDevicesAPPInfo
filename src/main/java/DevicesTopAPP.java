@@ -19,7 +19,7 @@ public class DevicesTopAPP {
     public static String GetPmPath = "adb shell pm path " + PackName;
     public static String GetPullFile = "adb pull " + PackPath + " "+ PackName + ".apk";
     public static String CloseAPP = "adb shell am force-stop" + PackName;
-    public static String CleanAPP = "adb shell am clear " + PackName;
+    public static String CleanAPP = "adb shell pm clear " + PackName;
     public static String UninstallAPP = "adb uninstall" + PackName;
     public static String StartAPP = "adb shell am start -n" + PackMainActivity;
     private static String SystemResult;
@@ -48,7 +48,7 @@ public class DevicesTopAPP {
 
     // 获取顶层APP的launcher信息
     public static String GetTopAPPMainActivity(String PackName){
-        GetTopAPPMainActivity = "adb shell dumpsys package " + PackName + " |grep -B5 android.intent.category.LAUNCHER  |grep filter";
+        GetTopAPPMainActivity = "adb  "+ deviceInfo.getSelectDevice() +"  shell dumpsys package " + PackName + " |grep -B5 android.intent.category.LAUNCHER  |grep filter";
         return GetTopAPPMainActivity;
     }
 
@@ -64,7 +64,7 @@ public class DevicesTopAPP {
 
     // 获取顶层应用程序包名 ;获取屏幕顶层应用进程名称 adb shell dumpsys activity activities|grep app=ProcessRecord
     public static void GetPIDPackageName(String packName){
-        String adbshell = "adb shell dumpsys activity activities|grep :" + packName;
+        String adbshell = "adb "+ deviceInfo.getSelectDevice() +" shell dumpsys activity activities|grep :" + packName;
         adbshell = CmdPull(adbshell);
 
         // 获取应用程序包名
@@ -92,7 +92,7 @@ public class DevicesTopAPP {
 
     // 执行获取进程PID的信息 > adb shell ps|grep u0_a1005
     public static String GetAPPPID(String CompatibleOS,String PackName){
-        GetAPPPID = "adb shell ps " + CompatibleOS + " |grep "+ PackName;
+        GetAPPPID = "adb "+ deviceInfo.getSelectDevice() +"  shell ps " + CompatibleOS + " |grep "+ PackName;
         return GetAPPPID;
     }
 
@@ -172,18 +172,18 @@ public class DevicesTopAPP {
 
     // 解决三星S9上获取多个64位进程pid的情况的bug
     public static String GetSystemPID(String CompatibleOS){
-        GetSystemPID = "adb shell ps  " + CompatibleOS + " |grep zygote64";
+        GetSystemPID = "adb "+ deviceInfo.getSelectDevice() +" shell ps  " + CompatibleOS + " |grep zygote64";
         return GetSystemPID;
     }
 
     public static String GetPmPath(String PackName){
-        GetPmPath = "adb shell pm path " + PackName;
+        GetPmPath = "adb  "+ deviceInfo.getSelectDevice() +"  shell pm path " + PackName;
         return GetPmPath;
     }
 
     // 执行备份文件命令
     public static String GetPullFile(String PackPath, String PackName){
-        GetPullFile = "adb pull " + PackPath + " "+ PackName + ".apk";
+        GetPullFile = "adb "+ deviceInfo.getSelectDevice() +"  pull " + PackPath + " "+ PackName + ".apk";
         GetPullFile = CmdPull(GetPullFile);
         // 判断备份是否成功
         if (GetPullFile.indexOf("error")!=-1){
@@ -200,14 +200,14 @@ public class DevicesTopAPP {
 
     // 执行关闭APP命令
     public static String CloseAPP(String PackName){
-        CloseAPP = "adb shell am force-stop " + PackName;
+        CloseAPP = "adb "+ deviceInfo.getSelectDevice() +" shell am force-stop " + PackName;
         CloseAPP = CmdPull(CloseAPP);
         return CloseAPP;
     }
 
     // 执行清理APP缓存命令
     public static String CleanAPP(String PackName){
-        CleanAPP = "adb shell pm clear " + PackName;
+        CleanAPP = "adb "+ deviceInfo.getSelectDevice() +" shell pm clear " + PackName;
         CleanAPP = CmdPull(CleanAPP);
         // 判断清理是否成功
         if (CleanAPP.indexOf("Error")!=-1){
@@ -224,14 +224,14 @@ public class DevicesTopAPP {
 
     // 执行启动APP命令
     public static String StartAPPLaunchableActivity(String LaunchableActivity){
-        StartAPP = "adb shell am start -n" + LaunchableActivity;
+        StartAPP = "adb  "+ deviceInfo.getSelectDevice() +" shell am start -n" + LaunchableActivity;
         StartAPP = CmdPull(StartAPP);
         return StartAPP;
     }
 
     // 执行卸载APP命令
     public static String UninstallAPP(String PackName){
-        UninstallAPP = "adb uninstall " + PackName;
+        UninstallAPP = "adb  "+ deviceInfo.getSelectDevice() +"  uninstall " + PackName;
         UninstallAPP = CmdPull(UninstallAPP);
         // 判断卸载是否成功
         if (UninstallAPP.indexOf("Failure")!=-1 || UninstallAPP.indexOf("Exception") != -1 || UninstallAPP.indexOf("error") != -1 ){
@@ -247,7 +247,7 @@ public class DevicesTopAPP {
 
     // 获取 app versionName, versionCode, minSdk, targetSdk
     public static String GetAppInfo(String PackName){
-        GetAppInfo = "adb shell dumpsys package " + PackName + "|grep version";
+        GetAppInfo = "adb  "+ deviceInfo.getSelectDevice() +"  shell dumpsys package " + PackName + "|grep version";
         GetAppInfo = CmdPull(GetAppInfo);
         return GetAppInfo;
     }
@@ -276,7 +276,8 @@ public class DevicesTopAPP {
 
     // 获取屏幕焦点应用信息
     public static  String GetmCurrentFocus(){
-        mCurrentFocus = CmdPull("adb shell dumpsys window | grep mCurrentFocus");
+//        mCurrentFocus = CmdPull("adb  "+ deviceInfo.getSelectDevice() +"  shell dumpsys window | grep mCurrentFocus");
+        mCurrentFocus = CmdPull("adb  "+ deviceInfo.getSelectDevice() +"  shell dumpsys window | grep mFocusedWindow=Window");
         String FindSring = null;
         try {
             FindSring = mCurrentFocus.split("\\s+")[3];
@@ -358,7 +359,8 @@ class GetPackNameThread implements Runnable {
     private static String GetTopAPP;
     public void run() {
         // 获取顶层APP程序包名和Activity
-        GetTopAPP = DevicesTopAPP.CmdPull(DevicesTopAPP.GetTopAPP).split(" ")[11];  // 此处有坑，不支持 32位 手机 head -1
+        GetTopAPP = "adb  "+ deviceInfo.getSelectDevice() +"  shell dumpsys activity activities  |grep -i hist |grep visible=true -1";
+        GetTopAPP = DevicesTopAPP.CmdPull(GetTopAPP).split(" ")[11];  // 此处有坑，不支持 32位 手机 head -1
         TopAPPInfo.setPackTopActivity(GetTopAPP);
         TopAPPInfo.setPackName(GetTopAPP.split("/")[0]);
     }
@@ -430,12 +432,15 @@ class GetAdbDevicesThread implements Runnable {
     private static String AdbDevices;
     public void run() {
         AdbDevices = DevicesTopAPP.CmdPull(DevicesTopAPP.GetAdbDevices);
+        // 遍历获取设备信息
+        getDevices.getDevicesInfo(AdbDevices);
+        deviceInfo.setDevicesRes(AdbDevices);
         GetConsole = AdbDevices.split("\n");
         int GetConsoleLenth = GetConsole.length;
         if( GetConsoleLenth == 2 && GetConsole[1].indexOf("device") != -1) {
             TopAPPInfo.setAdbDevices("Success");
         }else if (GetConsoleLenth >= 3){
-            TopAPPInfo.setAdbDevices("请检查电脑是否连接多余设备?");
+            TopAPPInfo.setAdbDevices("请检查电脑是否连接多台设备?");
         }else{
             TopAPPInfo.setAdbDevices("请检查设备是否正常连接!");
         }
