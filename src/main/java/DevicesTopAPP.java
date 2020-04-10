@@ -30,6 +30,11 @@ public class DevicesTopAPP {
     public static String CmdPull(String command){
         // 执行命令
         // String command = "adb shell getprop ro.product.brand";
+
+        // java虚拟机加载的时候没有adb相关的环境变量,如果执行adb的命令，建议在设定命令的参数里面使用全路径
+        // mac电脑电脑允许无法获取本地adb环境变量配置,需要手动配置
+        // command = "/Users/benjamin/Public/public/android-sdk-macosx/platform-tools/" + command;
+
         try {
             Process p = Runtime.getRuntime().exec(command);
             StreamCaptureThread errorStream = new StreamCaptureThread(p.getErrorStream());
