@@ -69,7 +69,7 @@ public class DevicesTopAPP {
 
     // 获取顶层应用程序包名 ;获取屏幕顶层应用进程名称 adb shell dumpsys activity activities|grep app=ProcessRecord
     public static void GetPIDPackageName(String packName){
-        String adbshell = "adb "+ deviceInfo.getSelectDevice() +" shell dumpsys activity activities|grep :" + packName;
+        String adbshell = "adb "+ deviceInfo.getSelectDevice() +" shell dumpsys activity activities|grep :" + packName + "/";
         adbshell = CmdPull(adbshell);
 
         // 获取应用程序包名
@@ -78,7 +78,7 @@ public class DevicesTopAPP {
 
         // 获取应用程序PID进程名
         adbshell = adbshell.split("\\s+")[2];
-        String pidpackagename = adbshell.split("/")[1];
+        String pidpackagename = adbshell.split(":")[0];
         pidpackagename = pidpackagename.substring(0,pidpackagename.length()-1);
         // 异常处理应用进程名错误时获取其包名
         try {
@@ -364,8 +364,8 @@ class GetPackNameThread implements Runnable {
     private static String GetTopAPP;
     public void run() {
         // 获取顶层APP程序包名和Activity
-        GetTopAPP = "adb  "+ deviceInfo.getSelectDevice() +"  shell dumpsys activity activities  |grep -i hist |grep visible=true -1";
-        GetTopAPP = DevicesTopAPP.CmdPull(GetTopAPP).split(" ")[11];  // 此处有坑，不支持 32位 手机 head -1
+        GetTopAPP = "adb  "+ deviceInfo.getSelectDevice() +"  shell dumpsys activity | grep 'mResumedActivity'";
+        GetTopAPP = DevicesTopAPP.CmdPull(GetTopAPP).split(" ")[7];
         TopAPPInfo.setPackTopActivity(GetTopAPP);
         TopAPPInfo.setPackName(GetTopAPP.split("/")[0]);
     }

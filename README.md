@@ -83,3 +83,17 @@ adb shell am start -n  <packname/packname.Activity>
 ## 关闭程序
 adb shell am force-stop <packname>
 
+
+
+## 更多ADB命令详解参考
+
+https://github.com/mzlogin/awesome-adb
+
+
+## Maven 打包备备备忘录
+
+    Plugins
+        assembly
+            assembly:assembly
+        clean
+            clean:clean
